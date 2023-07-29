@@ -19,8 +19,7 @@
             <button id="btn" class="mainbtn">Start</button>
         </div>
     </div>
-
-    
+ 
     <script>
         const setOfWords = ["The quick brown fox jumps over the lazy dog.",
          "Now is the time for all good men to come to the aid of their country.",
