@@ -8,6 +8,7 @@ include 'links.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+    <link rel="stylesheet" href="css/login_reg.css">
 </head>
 <body>
     <div class="box">

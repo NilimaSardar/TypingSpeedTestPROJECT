@@ -1,12 +1,10 @@
- <?php 
- include 'links.php';
- ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Test</title>
+    <link rel="stylesheet" href="css/typingtest.css">
  </head>
  <body>
     <div class="mainDiv">
@@ -19,7 +17,7 @@
             <button id="btn" class="mainbtn">Start</button>
         </div>
     </div>
- 
+
     <script>
         const setOfWords = ["The quick brown fox jumps over the lazy dog.",
          "Now is the time for all good men to come to the aid of their country.",
