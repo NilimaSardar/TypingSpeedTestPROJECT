@@ -4,7 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Test</title>
-    <link rel="stylesheet" href="css/typingtest.css">
+    <style>
+        *{
+            padding: 0; margin: 0; box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .mainDiv{
+            width: 100%;
+            height: 79vh;
+            position: relative;
+            background: #3a698b;
+        }
+
+        .centerDiv{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        h1{
+            text-transform: capitalize;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+            text-shadow: 1px 2px 3px #2980b9;
+            font-size: 2.1rem;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        textarea{
+            background-color: #444;
+            box-shadow: 0 0 1px rgba(0,0,0,0.2);
+            border-radius: 10px 10px 0 0;
+            border: 20px solid #34495e;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .mainbtn{
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: indianred;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    </style>
  </head>
  <body>
     <div class="mainDiv">
@@ -17,6 +67,9 @@
             <button id="btn" class="mainbtn">Start</button>
         </div>
     </div>
+    <?php
+    include 'footer1.php';
+    ?>
 
     <script>
         const setOfWords = ["The quick brown fox jumps over the lazy dog.",
