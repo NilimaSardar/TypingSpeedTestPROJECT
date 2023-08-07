@@ -3,17 +3,17 @@ include 'links.php';
 ?>
 
 <style>
-        *{
+         *{
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
         footer{
-            background-color: #a6c2d4;
+            background-color: none;
         }
         .footerContainer{
             width:100%;
-            padding: 5px 30px 5px;
+            padding: 10px 30px 10px;
         }
         .socialIcons{
             display:flex;
@@ -33,11 +33,12 @@ include 'links.php';
         }
         /* hover effect on social media icon */
         .socialIcons a:hover{
-            background-color: #a6c2d4;
-            transition: 0.5s;
+            background-color: #366a8d;
+            border:1px solid indianred;
+            transition: 0.4s;
         }
         .socialIcons a:hover i{
-            color: indianred;
+            color: white;
             transition: 0.5s;
         }
         .footerNav{
@@ -50,10 +51,10 @@ include 'links.php';
         }
         .footerNav ul li a{
             color: black;
-            margin: 20px;
+            margin: 15px;
             text-decoration: none;
             font-size: 1.3em;
-            opacity: 0.7;
+            opacity: 1;
             position: relative;
             transition: 0.2s;
         }
@@ -61,7 +62,7 @@ include 'links.php';
             content: '';
             position: absolute;
             top:0;
-            left: 0;
+            left: 20%;
             width: 0%;
             height: 100%;
             border-bottom: 2px solid indianred;
@@ -75,13 +76,13 @@ include 'links.php';
         }
         .footerNav .copyright{
             color: #817b7b;
-            opacity: 3;
+            opacity: 5;
             margin-top: 15px;
             text-align: center;
             font-size: 15px;
         }
         .designer{
-            opacity: 0.7;
+            opacity: 2;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 400;

@@ -13,7 +13,7 @@
             width: 100%;
             height: 79vh;
             position: relative;
-            background: #3a698b;
+            background: #366a8d;
         }
 
         .centerDiv{
