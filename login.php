@@ -37,12 +37,18 @@ include 'links.php';
             $pass_decode = password_verify($password,$db_pass);
 
             if($pass_decode){
-                echo "login successful";
-                ?>
-                <script>
-                    location.replace("example.php");
-                </script>
-                <?php
+                //echo "login successful";
+                //rememberme
+                if(isset($_POST['rememberme'])){
+
+                    setcookie('usernamecookie',$username,time()+86400);
+                    setcookie('passwordcookie',$password,time()+86400);
+
+                    header('location:example.php');
+                }else{
+                    header('location:example.php');
+                }
+            
             }else{
                 echo "password Incorrect";
             }
@@ -60,12 +66,12 @@ include 'links.php';
         
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
         <div class="input-field">
-            <input type="text" name="username" class="input" placeholder="username" required>
+            <input type="text" name="username" class="input" id="name" placeholder="username">
             <i class="fa fa-user-o" aria-hidden="true"></i>
         </div>
 
         <div class="input-field">
-            <input type="password" name="password" class="input" placeholder="password" required>
+            <input type="password" name="password" class="input" id="pass" placeholder="password">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </div>
 
@@ -75,7 +81,7 @@ include 'links.php';
 
         <div class="bottom">
             <div class="left">
-                <input type="checkbox" id="check">
+                <input type="checkbox" id="check" name="rememberme">
                 <label for="check">Remember Me</label>
             </div>
             <div class="right">
@@ -88,6 +94,18 @@ include 'links.php';
             <a href="signup.php">Sign Up</a>
         </span>
         </form>
+
+        <?php 
+        if(isset($_COOKIE['usernamecookie']) and isset($_COOKIE['passwordcookie'])){ 
+            $name = $_COOKIE['usernamecookie'];
+            $pass = $_COOKIE['passwordcookie'];
+
+            echo "<script>
+                document.getElementById('name').value = '$name';
+                document.getElementById('pass').value = '$pass';
+            </script>";
+        } 
+        ?>
     </div>
    </div>
 </body>

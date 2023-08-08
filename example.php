@@ -149,6 +149,25 @@ if(!isset($_SESSION['username'])){
             border:1px solid indianred;
             color: black;
         }
+        .timer-div{
+            width:100%;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #show-time{
+            font-size: 1.5rem;
+            color: white;
+            padding: 1.3rem;
+            text-align: right;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: .3rem solid indianred;
+        }
     </style>
 </head>
 <body>
@@ -177,9 +196,15 @@ if(!isset($_SESSION['username'])){
     
         <div class="centerDiv">
             <h1>Welcome To Typing Speed Test <?php echo $_SESSION['username']; ?></h1>
+
+            <div class="timer-div">
+                <p id="show-time"></p>
+            </div>
+
             <h2 id="msz"></h2>
+            <h2 id="score"></h2>
             <br>
-            <textarea id="myWords" cols="80" rows="10" placeholder="Remember, be nice!"></textarea>
+            <textarea id="myWords" cols="80" rows="10" placeholder="Remember, be nice!" disabled></textarea>
             <br>
             <button id="btn" class="mainbtn">Start</button>
         </div>
@@ -189,77 +214,148 @@ if(!isset($_SESSION['username'])){
         ?>
     </div>
 </div>
+    <script>
+        //STEP 1
+        // selecting the neccessary elements using their respective
+        // ids and creating variables to store the start Time,
+        // end time and total timeTaken.
 
-<script>
-        const setOfWords = ["The quick brown fox jumps over the lazy dog.",
-         "Now is the time for all good men to come to the aid of their country.",
-        "Adle was I ere I saw Elba."];
+        const typing_ground = document.getElementById("myWords");
+        const btn =document.getElementById("btn");
+        const score = document.getElementById("score");
+        const showSentence = document.getElementById("msz");
+        const showTime = document.getElementById("show-time");
+        //const showTime = document.querySelector('#show-time');
 
-        const msz = document.getElementById('msz');
-        const typeWords = document.getElementById('myWords');
-        const btn = document.getElementById('btn');
-        let startTime, endTime;
+        let startTime, endTime, totalTimeTaken, sentence_to_write;
 
-        const playGame = () =>{
-            let randomNumber = Math.floor(Math.random()*setOfWords.length);
-            msz.innerText = setOfWords[randomNumber];
-            let date = new Date();
-            startTime = date.getTime();
-            btn.innerText = "Done";
+        const sentences = ['hello my name is nilima',
+                        'hello my name is nilima1',
+                        'hello my name i s nilima2',
+                        'hello my name is nilima3']
+
+        //STEP 7
+        const errorChecking = (words) => {
+            console.log(words);
+
+            let num = 0;
+            sentence_to_write = showSentence.innerHTML;
+            sentence_to_write = sentence_to_write.trim().split(" ");
+            //console.log(sentence_to_write);
+
+            for(let i=0; i<words.length;i++){
+                if(words[i] === sentence_to_write[i]){
+                    num++;
+                }
+            }
+            return num;
         }
 
-        const endGame = () =>{
+        //STEP 5
+        //Defining a function calculateTypingSpeed to calculate the typing 
+        //speed.Get the value of the textarea,remove any leading or trailing 
+        //white spaces,split the text into an array of words, and calculate 
+        //the number of words. If the number of words is not 0,calculate the 
+        //typing speed and display it in the score div. Otherwise, display 0 
+        //as the typing speed.
+
+        const calculateTypingSpeed = (totalTimeTaken) =>{
+            let totalWords = typing_ground.value.trim();
+            let actualWords = totalWords === '' ? 0 : totalWords.split(" ");
+
+            //errorChecking
+            actualWords = errorChecking(actualWords);
+
+            if(actualWords !== 0){
+                let typing_speed = (actualWords/totalTimeTaken)*60;
+                typing_speed = Math.round(typing_speed);
+                score.innerHTML = `Your typing speed is ${typing_speed} words per minutes & you wrote ${actualWords} correct words out of ${sentence_to_write.length} & time taken ${totalTimeTaken} sec`;
+            }else{
+                score.innerHTML = `Your typing speed is 0 words per minutes & TIME TAKEN ${totalTimeTaken}  sec`;
+            }
+        }
+
+
+        //STEP 4
+        //Definning a function endTypingTest to run when the user clicks the
+        //"Done"button. In this function,get the end time, calculate the 
+        //totalTimeTaken, call the calculateTypingSpeed Function, clear the 
+        //showSentence div and the textarea.
+
+        const endTypingTest = () =>{
+            btn.innerText = "Start";
+            //adding Timer
+            showTimer();
+
             let date = new Date();
             endTime = date.getTime();
-            let totalTime = ((endTime - startTime)/ 1000);
-            //console.log(totalTime);
 
-            let totalStr = typeWords.value;
-            let wordCount = wordCounter(totalStr);
+            totalTimeTaken = (endTime-startTime) / 1000;
+            //console.log(totalTimeTaken);
 
-            let speed = Math.round((wordCount / totalTime)*60);
+            calculateTypingSpeed(totalTimeTaken);
 
-            let finalMsg = "You typed total at " + speed + " words per minutes ";
+            showSentence.innerHTML = "";
+            typing_ground.value = "";
+            
+        }
+        //STEP 6
+        let intervalID, elapsedTime = 0;
 
-            finalMsg += compareWords(msz.innerText,totalStr);
-
-            msz.innerText = finalMsg;
+        const showTimer = () =>{
+            if(btn.innerText==="Done"){
+                intervalID = setInterval(() =>{
+                    elapsedTime++;
+                    showTime.innerHTML = elapsedTime;
+                },1000)
+            }else if(btn.innerText==="Start"){
+                elapsedTime = 0;
+                clearInterval(intervalID);
+                showTime.innerHTML = "";
+            }
         }
 
-        const compareWords = (str1, str2) =>{
-            let words1 = str1.split(" ");
-            let words2 = str2.split(" ");
-            let cnt = 0;
+        //STEP 3
+        //Defining a function startTypingTest to generate a random sentence
+        //from an array of sentences, show the sentence in the show_sentence
+        //div. get the startime and change the button text to "Done".
 
-            /*arrayName then foreach then it will take whole
-            function with the value and index no. of that array*/
-            words1.forEach(function(item, index){
-                if (item == words2[index]){
-                    cnt++;
-                }
-            })
+        const startTypingTest = () =>{
+            let randomNumber = Math.floor(Math.random()*sentences.length);
+            //console.log(randomNumber);
+            showSentence.innerHTML = sentences[randomNumber];
 
-            let errorWords = ( words1.length -cnt );
-            return (cnt + " correct out of " + words1.length + " words and the total number of error are " + errorWords + ".");
+            let date = new Date();
+            startTime = date.getTime();
+
+            btn.innerText = "Done";
+            score.innerHTML = "";
+
+            //adding Timer
+            showTimer();
         }
 
-        const wordCounter = (str) =>{
-            let response = str.split(" ").length;
-            //console.log(response);
-            return response;
-        }
+        //STEP 2
+        //Attaching a click eventlistener to the button.
+        //When the user clicks the button,check if the text is
+        //"Start" or "Done".
+        //if it is "Start", enable the textarea and call the 
+        //startTypingTest function. If it is "Done",disable the 
+        //textarea and call the endTypingTest function.
 
-        btn.addEventListener('click', function(){
-            if(this.innerText == 'Start'){
-                typeWords.disabled = false;
-                playGame();
-            }else if(this.innerText == 'Done'){
-                typeWords.disabled = true;
-                btn.innerText = "Start";
-                endGame();
+        btn.addEventListener('click',() =>{
+            switch(btn.innerText.toLowerCase()){
+                case "start":
+                    typing_ground.removeAttribute('disabled');
+                    startTypingTest();
+                    break;
+
+                case "done":
+                    typing_ground.setAttribute('disabled','true');
+                    endTypingTest();
+                    break;
             }
         })
     </script>
-
 </body>
 </html>
