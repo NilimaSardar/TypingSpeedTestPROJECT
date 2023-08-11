@@ -108,5 +108,16 @@ include 'links.php';
         ?>
     </div>
    </div>
+
+   <script>
+    $.ajax({
+                url:'Achievement.php',
+                method: 'post',
+                data:{username:username},
+                success: function(response){
+                    console.log(response);
+                }
+            });
+   </script>
 </body>
 </html>

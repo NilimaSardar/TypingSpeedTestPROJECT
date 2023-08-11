@@ -14,6 +14,7 @@ if(!isset($_SESSION['username'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="JQuery.js"></script>
     <style>
         body{
             font-family:  'Roboyo', sans-serif;
@@ -168,10 +169,125 @@ if(!isset($_SESSION['username'])){
             border-radius: 50%;
             border: .3rem solid indianred;
         }
+        .menu-bar{
+            color: black;
+            opacity: 0.7;
+            position: absolute;
+            right: 200px;
+            top: 30px
+        }
+        .menu-bar ul{
+            display:inline-flex;
+            list-style: none;
+        }
+        .menu-bar ul li{
+            padding: 10px 20px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .menu-bar ul li a{
+            text-decoration: none;
+            color: black;
+        }
+        .menu-bar .fa{
+            margin-right: 8px;
+        }
+        .sub-menu-1{
+            display: none;
+        }
+        .menu-bar ul li:hover .sub-menu-1{
+            display: block;
+            position:absolute;
+            background: #a6c2d4;
+            margin-top: 0px;
+            margin-left: -15px;
+        }
+        .menu-bar ul li:hover .sub-menu-1 ul{
+            display: block;
+            margin: 10px;
+        }
+        .menu-bar ul li:hover .sub-menu-1 ul li{
+            width: 150px;
+            padding: 10px;
+            border-bottom: 1px dotted #fff;
+            background: transparent;
+            border-radius: 0;
+            text-align: left;
+        }
+        .menu-bar ul li:hover .sub-menu-1 ul li:last-child{
+            border-bottom:none;
+        }
+        .menu-bar ul li:hover .sub-menu-1 ul li a:hover{
+            color: #b2ff00;
+        }
+        .fa-angle-right{
+            float: right;
+        }
+        .sub-menu-2{
+            display: none;
+        }
+        .hover-me:hover .sub-menu-2{
+            position: absolute;
+            display: block;
+            margin-top: -40px;
+            margin-left: 140;
+            background:#a6c2d4;
+        }
     </style>
 </head>
 <body>
 <div class="mainDiv">
+
+
+<nav>
+        <div class="menu-bar">
+            <ul class="active">
+                <li><a href=""><i class="fa fa-language"></i>Language</a>
+                    <div class= "sub-menu-1">
+                        <ul>
+                            <li><a href="">English</a></li>
+                            <li><a href="">Nepali</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href=""><i class="fa fa-align-left"></i>Level</a>
+                    <div class= "sub-menu-1">
+                        <ul>
+                            <li class="hover-me"><a href="">Easy</a><i class="fa fa-angle-right"></i>
+                                <div class= "sub-menu-2">
+                                    <ul>
+                                        <li><a href="">Alphabets</a></li>
+                                        <li><a href="">Numbers</a></li>
+                                        <li><a href="">Characters</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="hover-me"><a href="">Medium</a><i class="fa fa-angle-right"></i>
+                            <div class= "sub-menu-2">
+                                    <ul>
+                                        <li><a href="">Alphabets</a></li>
+                                        <li><a href="">Numbers</a></li>
+                                        <li><a href="">Characters</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="hover-me"><a href="">Hard</a><i class="fa fa-angle-right"></i>
+                            <div class= "sub-menu-2">
+                                    <ul>
+                                        <li><a href="">Quotes</a></li>
+                                        <li><a href="">Facts</a></li>
+                                        <li><a href="">Code</a></li>
+                                        <li><a href="">Random</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="sidebar-show">
     <input type="checkbox" id="check">
     <label for="check">
@@ -184,7 +300,7 @@ if(!isset($_SESSION['username'])){
             <li><a href=""><i class="fa fa-qrcode" aria-hidden="true"></i>Dashboard</a></li>
             <li><a href=""><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
             <li><a href=""><i class="fa fa-tasks" aria-hidden="true"></i>Task</a></li>
-            <li><a href=""><i class="fa fa-star" aria-hidden="true"></i>Achievements</a></li>
+            <li><a href="Achievement.php" id="display_achievement"><i class="fa fa-star" aria-hidden="true"></i>Achievements</a></li>
             <li><a href=""><i class="fa fa-comments-o" aria-hidden="true"></i>Feedback</a></li>
             <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
             <div class="bottom-shift">
@@ -266,13 +382,26 @@ if(!isset($_SESSION['username'])){
             //errorChecking
             actualWords = errorChecking(actualWords);
 
-            if(actualWords !== 0){
-                let typing_speed = (actualWords/totalTimeTaken)*60;
+            let typing_speed = (actualWords/totalTimeTaken)*60;
                 typing_speed = Math.round(typing_speed);
-                score.innerHTML = `Your typing speed is ${typing_speed} words per minutes & you wrote ${actualWords} correct words out of ${sentence_to_write.length} & time taken ${totalTimeTaken} sec`;
+                sentence_to_write = sentence_to_write.length;
+
+            if(actualWords !== 0){
+                score.innerHTML = `Your typing speed is ${typing_speed} words per minutes & you wrote ${actualWords} correct words out of ${sentence_to_write} & time taken ${totalTimeTaken} sec`;
             }else{
                 score.innerHTML = `Your typing speed is 0 words per minutes & TIME TAKEN ${totalTimeTaken}  sec`;
             }
+
+            //Storing all records into database
+            $.ajax({
+                url:'StoringValueajax.php',
+                method: 'post',
+                data:{speed:typing_speed,correct_Word:actualWords,Outof:sentence_to_write,totaltime:totalTimeTaken},
+                success: function(response){
+                    console.log(response);
+                }
+            });
+            
         }
 
 
@@ -356,6 +485,20 @@ if(!isset($_SESSION['username'])){
                     break;
             }
         })
+
+        //To show the data from database on clicking Achievement
+        $(document).ready(function(){
+            $('#display_achievements').click(function(){
+                $.ajax({
+                    url: 'Achievement.php',
+                    type: 'post',
+
+                    success:function(responsedata){
+                        console.log(responsedata);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
