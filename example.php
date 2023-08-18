@@ -5,6 +5,8 @@ if(!isset($_SESSION['username'])){
     echo "you are logged out";
     header('location:index.php');
 }
+
+include 'connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,79 +27,6 @@ if(!isset($_SESSION['username'])){
             list-style: none;
             text-decoration: none;
         }
-        .sidebar{
-            position: fixed;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #3f5560;
-            transition: all .5s ease;
-        }
-        .sidebar header{
-            font-size: 22px;
-            color: white;
-            text-align: center;
-            line-height: 70px;
-            background: #2a5268;
-            user-select: none;
-        }
-        .sidebar ul a{
-            display: block;
-            height: 100%; 
-            width: 100%;
-            line-height:50px;
-            font-size: 20px;
-            color: white;
-            padding-left: 40px;
-            box-sizing: border-box;
-            border-top: 1px solid rgba(255,255,255,.1);
-            transition: .4s;
-            position: relative;
-        }
-        ul li:hover a{
-            padding-left: 50px;
-        }
-        .sidebar ul a i{
-            margin-right: 16px;
-        }
-        #check{
-            display: none;
-        }
-        label #btnn,label #cancel{
-            position: absolute;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        label #btnn{
-            left: 20px;
-            top: 25px;
-            font-size: 27px;
-            color: white;
-            opacity: .6;
-            padding: 6px 12px;
-            transition: all .5s;
-        }
-        label #cancel{
-            z-index: 1111;
-            left: -195px;
-            top: 17px;
-            font-size: 27px;
-            color: white;
-            opacity: .6;
-            padding: 4px 9px;
-            transition: all .5s ease;
-        }
-        #check:checked ~ .sidebar{
-            left:0;
-        }
-        #check:checked ~ label #btnn{
-            left: 250px;
-            opacity: 0;
-            pointer-events: none;
-        }
-        #check:checked ~ label #cancel{
-            left: 195px;
-        }
         
         .mainDiv{
             width: 100%;
@@ -112,6 +41,7 @@ if(!isset($_SESSION['username'])){
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            z-index: 2;
         }
 
         h1{
@@ -169,147 +99,119 @@ if(!isset($_SESSION['username'])){
             border-radius: 50%;
             border: .3rem solid indianred;
         }
-        .menu-bar{
-            color: black;
-            opacity: 0.7;
-            position: absolute;
-            right: 200px;
-            top: 30px
+        .menu-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999 ;
         }
-        .menu-bar ul{
-            display:inline-flex;
+        .menu-container.hidden{
+            display: none;
+        }
+        .menu-container .bar{
+            font-size: 30px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 0;
+            background: #3f5560;
+            overflow: hidden;
+            transition: height 0.5s ease;
+            z-index: 998;
+        }
+        .sidebar.show {
+            height: calc(50vh - 40px);
+        }
+        .sidebar ul {
             list-style: none;
+            padding: 20px;
+            margin: 0;
         }
-        .menu-bar ul li{
-            padding: 10px 20px;
-            font-size: 22px;
-            font-weight: 500;
+        .sidebar ul li {
+            margin-bottom: 20px;
         }
-        .menu-bar ul li a{
+        .sidebar ul li a {
+            color: white;
             text-decoration: none;
-            color: black;
+            font-size: 18px;
         }
-        .menu-bar .fa{
-            margin-right: 8px;
-        }
-        .sub-menu-1{
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             display: none;
+            z-index: 997;
         }
-        .menu-bar ul li:hover .sub-menu-1{
+        .sidebar.show ~ .overlay {
             display: block;
-            position:absolute;
-            background: #a6c2d4;
-            margin-top: 0px;
-            margin-left: -15px;
         }
-        .menu-bar ul li:hover .sub-menu-1 ul{
-            display: block;
-            margin: 10px;
-        }
-        .menu-bar ul li:hover .sub-menu-1 ul li{
-            width: 150px;
-            padding: 10px;
-            border-bottom: 1px dotted #fff;
-            background: transparent;
-            border-radius: 0;
-            text-align: left;
-        }
-        .menu-bar ul li:hover .sub-menu-1 ul li:last-child{
-            border-bottom:none;
-        }
-        .menu-bar ul li:hover .sub-menu-1 ul li a:hover{
-            color: #b2ff00;
-        }
-        .fa-angle-right{
-            float: right;
-        }
-        .sub-menu-2{
-            display: none;
-        }
-        .hover-me:hover .sub-menu-2{
+
+        .nav-bar {
             position: absolute;
-            display: block;
-            margin-top: -40px;
-            margin-left: 140;
-            background:#a6c2d4;
+            top: 20px;
+            right: 70px; 
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1;
         }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-item span {
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
 <div class="mainDiv">
 
-
-<nav>
-        <div class="menu-bar">
-            <ul class="active">
-                <li><a href=""><i class="fa fa-language"></i>Language</a>
-                    <div class= "sub-menu-1">
-                        <ul>
-                            <li><a href="">English</a></li>
-                            <li><a href="">Nepali</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href=""><i class="fa fa-align-left"></i>Level</a>
-                    <div class= "sub-menu-1">
-                        <ul>
-                            <li class="hover-me"><a href="">Easy</a><i class="fa fa-angle-right"></i>
-                                <div class= "sub-menu-2">
-                                    <ul>
-                                        <li><a href="">Alphabets</a></li>
-                                        <li><a href="">Numbers</a></li>
-                                        <li><a href="">Characters</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="hover-me"><a href="">Medium</a><i class="fa fa-angle-right"></i>
-                            <div class= "sub-menu-2">
-                                    <ul>
-                                        <li><a href="">Alphabets</a></li>
-                                        <li><a href="">Numbers</a></li>
-                                        <li><a href="">Characters</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="hover-me"><a href="">Hard</a><i class="fa fa-angle-right"></i>
-                            <div class= "sub-menu-2">
-                                    <ul>
-                                        <li><a href="">Quotes</a></li>
-                                        <li><a href="">Facts</a></li>
-                                        <li><a href="">Code</a></li>
-                                        <li><a href="">Random</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="sidebar-show">
-    <input type="checkbox" id="check">
-    <label for="check">
-        <i class="fa fa-bars" aria-hidden="true" id="btnn"></i>
-        <i class="fa fa-times" aria-hidden="true" id="cancel"></i>
-    </label>
-    <div class="sidebar">
-        <header>Menu</header>
+<div class="menu-container" id="menuContainer" onclick="toggleSidebar()">
+        <i class="fa fa-bars bar"></i>
+    </div>
+    <div class="sidebar" id="sidebar">
         <ul>
-            <li><a href=""><i class="fa fa-qrcode" aria-hidden="true"></i>Dashboard</a></li>
-            <li><a href=""><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
-            <li><a href=""><i class="fa fa-tasks" aria-hidden="true"></i>Task</a></li>
-            <li><a href="Achievement.php" id="display_achievement"><i class="fa fa-star" aria-hidden="true"></i>Achievements</a></li>
-            <li><a href=""><i class="fa fa-comments-o" aria-hidden="true"></i>Feedback</a></li>
-            <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i>Setting</a></li>
-            <div class="bottom-shift">
-            <li><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
-            </div>
-            </ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">Task</a></li>
+            <li><a href="#">Achievements</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Setting</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
     </div>
-    </div>
-    
+    <div class="overlay" onclick="toggleSidebar()"></div>
+    <script>
+        var menuContainer = document.getElementById("menuContainer");
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var overlay = document.querySelector(".overlay");
+            sidebar.classList.toggle("show");
+            overlay.style.display = sidebar.classList.contains("show") ? "block" : "none";
+
+            menuContainer.classList.toggle("hidden",sidebar.classList.contains("show"));
+        }
+    </script>
         <div class="centerDiv">
             <h1>Welcome To Typing Speed Test <?php echo $_SESSION['username']; ?></h1>
 
@@ -329,6 +231,47 @@ if(!isset($_SESSION['username'])){
         include 'footer1.php';
         ?>
     </div>
+</div>
+<div class="nav-bar">
+    <div class="nav-item">
+        <span>Language:</span>
+        <select onchange="myfun(this.value)">
+            <option>Select Any one</option>
+                        <?php
+                        $q="select * from language";
+                        $result = mysqli_query($conn,$q);
+                        while($rows = mysqli_fetch_array($result)){
+                            ?>
+                            <option value="<?php echo $rows['Langid']; ?>"><?php echo $rows['language']; ?></option>
+                            <?php
+                        }
+                        ?>
+        </select>
+    </div>
+    <div class="nav-item">
+        <span>Level:</span>
+        <select id="dataget">
+            <option>Select Any one</option>
+        </select>
+    </div>
+
+    <script type="text/javascript">
+        
+        function myfun(datavalue){
+
+            $.ajax({
+
+                url: 'lang_level.php',
+                type: 'POST',
+                data: {datapost : datavalue},
+
+                success: function(result){
+                    $('#dataget').html(result);
+                }
+            });
+        }
+
+    </script>
 </div>
     <script>
         //STEP 1
@@ -400,8 +343,8 @@ if(!isset($_SESSION['username'])){
                 success: function(response){
                     console.log(response);
                 }
-            });
-            
+            });  
+
         }
 
 
@@ -463,6 +406,18 @@ if(!isset($_SESSION['username'])){
             //adding Timer
             showTimer();
         }
+
+        // Attaching a keydown event listener to the textarea
+        typing_ground.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default Enter key behavior
+                if (btn.innerText.toLowerCase() === "done") {
+                    endTypingTest();
+                } else if (btn.innerText.toLowerCase() === "start") {
+                    startTypingTest();
+                }
+            }
+        });
 
         //STEP 2
         //Attaching a click eventlistener to the button.
