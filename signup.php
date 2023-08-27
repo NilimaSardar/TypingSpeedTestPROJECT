@@ -67,6 +67,7 @@ if(isset($_POST['submit'])){
       <?php
     }
   }
+  header('location:login.php');
 }
 ?>
 

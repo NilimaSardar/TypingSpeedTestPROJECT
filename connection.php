@@ -7,13 +7,7 @@ $database="typingTest";
 
 $conn = mysqli_connect($servername,$username,$password,$database);
 
-if($conn){
-    ?>
-    <script>
-    alert ("connection successful");
-    </script>
-    <?php
-}else{
+if(!$conn){
     //echo "No connection";
     die("No connection".mysqli_connect_error());
 }

@@ -193,10 +193,10 @@ include 'connection.php';
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">My Profile</a></li>
             <li><a href="#">Task</a></li>
-            <li><a href="#">Achievements</a></li>
+            <li><a href="Achievement.php">Achievements</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Setting</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
     <div class="overlay" onclick="toggleSidebar()"></div>
@@ -235,7 +235,7 @@ include 'connection.php';
 <div class="nav-bar">
     <div class="nav-item">
         <span>Language:</span>
-        <select onchange="myfun(this.value)">
+        <select id="languageSelect" onchange="updateLevel(this.value)">
             <option>Select Any one</option>
                         <?php
                         $q="select * from language";
@@ -250,30 +250,12 @@ include 'connection.php';
     </div>
     <div class="nav-item">
         <span>Level:</span>
-        <select id="dataget">
-            <option>Select Any one</option>
+        <select id="levelSelect" onchange="updateSentences()">
+            <option value="">Select Any one</option>
         </select>
     </div>
-
-    <script type="text/javascript">
-        
-        function myfun(datavalue){
-
-            $.ajax({
-
-                url: 'lang_level.php',
-                type: 'POST',
-                data: {datapost : datavalue},
-
-                success: function(result){
-                    $('#dataget').html(result);
-                }
-            });
-        }
-
-    </script>
 </div>
-    <script>
+    <script type="text/javascript">
         //STEP 1
         // selecting the neccessary elements using their respective
         // ids and creating variables to store the start Time,
@@ -288,11 +270,53 @@ include 'connection.php';
 
         let startTime, endTime, totalTimeTaken, sentence_to_write;
 
-        const sentences = ['hello my name is nilima',
-                        'hello my name is nilima1',
-                        'hello my name i s nilima2',
-                        'hello my name is nilima3']
+        function updateLevel(selectedLang) {
+            $.ajax({
+                url: 'get_levels.php',
+                type: 'POST',
+                data: { lang: selectedLang },
+                dataType: 'json', // Set expected data type to JSON
+                success: function(response) {
+                    console.log(response);
+                    $('#levelSelect').html(""); // Clear previous options
+                    $('#levelSelect').append($('<option>', {
+                        value: "", // Adding an empty option as the default
+                        text: "Select Any one"
+                    }));
+                    // Append new options
+                    $.each(response, function(key, value) {
+                        $('#levelSelect').append($('<option>', {
+                            value: value.id,
+                            text: value.level
+                        }));
+                    });
+                }
+            });
+        }
 
+        let sentences = [];
+
+        function updateSentences() {
+            const selectedLang = $('#languageSelect').val();
+            const selectedLevel = $('#levelSelect').val();
+
+            $.ajax({
+                url: 'get_sentences.php',
+                type: 'POST',
+                data: { lang: selectedLang, level: selectedLevel },
+                dataType: 'JSON', //Expect JSON response
+
+                success: function(response) {
+                    console.log("Sentences received:", response);
+                    sentences = response;
+                },
+                error: function(xhr, status, error) {
+                    console.log("AJAX request failed");
+                    console.log("Error:", error);
+                }
+            });
+        }
+        
         //STEP 7
         const errorChecking = (words) => {
             console.log(words);
@@ -395,7 +419,7 @@ include 'connection.php';
         const startTypingTest = () =>{
             let randomNumber = Math.floor(Math.random()*sentences.length);
             //console.log(randomNumber);
-            showSentence.innerHTML = sentences[randomNumber];
+            showSentence.innerHTML = sentences[randomNumber].sentence;
 
             let date = new Date();
             startTime = date.getTime();

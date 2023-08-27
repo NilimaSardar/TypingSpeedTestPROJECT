@@ -44,9 +44,9 @@ include 'links.php';
                     setcookie('usernamecookie',$username,time()+86400);
                     setcookie('passwordcookie',$password,time()+86400);
 
-                    header('location:example.php');
+                    header('location:typingTest.php');
                 }else{
-                    header('location:example.php');
+                    header('location:typingTest.php');
                 }
             
             }else{
