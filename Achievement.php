@@ -99,6 +99,8 @@ session_start();
                 <th>Correct Word</th>
                 <th>Out Of</th>
                 <th>Time Taken(sec)</th>
+                <th>Language</th>
+                <th>Level</th>
             </thead>
             <tbody id="response">
             <?php
@@ -110,6 +112,22 @@ session_start();
                     <td><?php echo $result['Correctword']; ?></td>
                     <td><?php echo $result['Outof']; ?></td>
                     <td><?php echo $result['TimeTaken']; ?></td>
+                    <td><?php if( $result['Lang']==1){
+                                    echo "English";
+                                }else{
+                                    echo "Nepali";
+                                }
+                        ?>
+                    </td>
+                    <td><?php if($result['Level']==1 || $result['Level']==4){
+                                    echo "Easy";
+                                }elseif($result['Level']==2 || $result['Level']==5){
+                                    echo "Medium";
+                                }else{
+                                    echo "Hard";
+                                }
+                        ?>
+                    </td>
                 </tr>
             <?php
                     }

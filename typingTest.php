@@ -363,7 +363,12 @@ include 'connection.php';
             $.ajax({
                 url:'StoringValueajax.php',
                 method: 'post',
-                data:{speed:typing_speed,correct_Word:actualWords,Outof:sentence_to_write,totaltime:totalTimeTaken},
+                data:{
+                    speed:typing_speed,
+                    correct_Word:actualWords,
+                    Outof:sentence_to_write,
+                    totaltime:totalTimeTaken,
+                },
                 success: function(response){
                     console.log(response);
                 }

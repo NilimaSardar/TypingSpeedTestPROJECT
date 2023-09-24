@@ -17,7 +17,9 @@ if (mysqli_num_rows($result) === 0) {
         Speed VARCHAR(30),
         Correctword VARCHAR(30),
         Outof VARCHAR(30),
-        TimeTaken VARCHAR(30)
+        TimeTaken VARCHAR(30),
+        Lang VARCHAR(30),
+        Level VARCHAR(30),
     )";
 
     if (mysqli_query($conn,$sql_create_table) === TRUE) {
@@ -33,9 +35,12 @@ $correctWord=$_POST['correct_Word'];
 $Outof=$_POST['Outof'];
 $Totaltime=$_POST['totaltime'];
 
+$Language=$_SESSION['language'];
+$Level=$_SESSION['level'];
+
 // SQL query to insert data into the table
-$insert = "insert into $username(Speed,Correctword,Outof,TimeTaken)
- values('$Speed','$correctWord','$Outof','$Totaltime')";
+$insert = "insert into $username(Speed,Correctword,Outof,TimeTaken,Lang,Level)
+ values('$Speed','$correctWord','$Outof','$Totaltime','$Language','$Level')";
 
 if (mysqli_query($conn,$insert) === TRUE) {
     echo "Data inserted successfully";

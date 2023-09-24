@@ -6,6 +6,8 @@ include 'connection.php';
 
 $selectedLang = $_POST['lang'];
 $selectedLevel = $_POST['level'];
+$_SESSION['language'] = $selectedLang;
+$_SESSION['level'] = $selectedLevel;
 
 $q = "SELECT sentence FROM sentences WHERE Langid = $selectedLang AND Levelid = $selectedLevel";
 // $q = "SELECT sentence FROM sentences WHERE Langid = 1 AND Levelid = 1";

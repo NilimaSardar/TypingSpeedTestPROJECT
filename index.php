@@ -14,8 +14,8 @@
             </div>
             <div class="menu">
                 <a href="#">Home</a>
-                <a href="#">Tests</a>
-                <a href="#">About</a>
+                <a href="test.php">Tests</a>
+                <a href="about.php">About</a>
                 <a href="#">Themes</a>
                 <a href="#">Lang</a>
             </div>
