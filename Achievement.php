@@ -76,7 +76,7 @@ session_start();
         $username = $_SESSION['username'];
         
         // Check if the table exists
-        $q = "SHOW TABLES LIKE '$username'";
+        $q = "SHOW TABLES LIKE 'game_data'";
         $tableExistsResult = mysqli_query($conn, $q);
 
         if ($tableExistsResult === false) {
@@ -85,7 +85,7 @@ session_start();
             if (mysqli_num_rows($tableExistsResult) === 0) {
                 echo "<p>No achievements available for $username.</p>";
             } else {
-                $q = "SELECT * FROM $username";
+                $q = "SELECT * FROM game_data WHERE Username='$username'";
                 $query = mysqli_query($conn, $q);
 
                 if ($query === false) {
@@ -104,10 +104,11 @@ session_start();
             </thead>
             <tbody id="response">
             <?php
+                    $gameCounter = 1;
                     while ($result = mysqli_fetch_array($query)) {
             ?>
                 <tr>
-                    <td><?php echo $result['Gameid'] . "."; ?></td>
+                    <td><?php echo $gameCounter . "."; ?></td>
                     <td><?php echo $result['Speed']; ?></td>
                     <td><?php echo $result['Correctword']; ?></td>
                     <td><?php echo $result['Outof']; ?></td>
@@ -130,6 +131,7 @@ session_start();
                     </td>
                 </tr>
             <?php
+                    $gameCounter++;
                     }
             ?>
             </tbody>
