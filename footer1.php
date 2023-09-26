@@ -106,8 +106,8 @@ include 'links.php';
             </div>
             <div class="footerNav">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
+                    <li><a href="logout.php">Home</a></li>
+                    <li><a href="about.php">About</a></li>
                     <li><a href="">Contact Us</a></li>
                     <li><a href="">Privacy Policy</a></li>
                 </ul>

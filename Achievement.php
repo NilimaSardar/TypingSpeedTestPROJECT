@@ -76,7 +76,7 @@ session_start();
         $username = $_SESSION['username'];
         
         // Check if the table exists
-        $q = "SHOW TABLES LIKE 'game_data'";
+        $q = "SHOW TABLES LIKE 'test_data'";
         $tableExistsResult = mysqli_query($conn, $q);
 
         if ($tableExistsResult === false) {
@@ -85,7 +85,7 @@ session_start();
             if (mysqli_num_rows($tableExistsResult) === 0) {
                 echo "<p>No achievements available for $username.</p>";
             } else {
-                $q = "SELECT * FROM game_data WHERE Username='$username'";
+                $q = "SELECT * FROM test_data WHERE Username='$username'";
                 $query = mysqli_query($conn, $q);
 
                 if ($query === false) {
@@ -113,16 +113,16 @@ session_start();
                     <td><?php echo $result['Correctword']; ?></td>
                     <td><?php echo $result['Outof']; ?></td>
                     <td><?php echo $result['TimeTaken']; ?></td>
-                    <td><?php if( $result['Lang']==1){
+                    <td><?php if( $result['Langid']==1){
                                     echo "English";
                                 }else{
                                     echo "Nepali";
                                 }
                         ?>
                     </td>
-                    <td><?php if($result['Level']==1 || $result['Level']==4){
+                    <td><?php if($result['Levelid']==1 || $result['Levelid']==4){
                                     echo "Easy";
-                                }elseif($result['Level']==2 || $result['Level']==5){
+                                }elseif($result['Levelid']==2 || $result['Levelid']==5){
                                     echo "Medium";
                                 }else{
                                     echo "Hard";
