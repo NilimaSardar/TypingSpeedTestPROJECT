@@ -190,12 +190,10 @@ include 'connection.php';
     </div>
     <div class="sidebar" id="sidebar">
         <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">Task</a></li>
+            <li><a href="profile.php">My Profile</a></li>
             <li><a href="Achievement.php">Achievements</a></li>
             <li><a href="#">Feedback</a></li>
-            <li><a href="#">Setting</a></li>
+            <li><a href="#">Time Spent</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>

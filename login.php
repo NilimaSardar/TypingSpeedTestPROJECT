@@ -33,6 +33,8 @@ include 'links.php';
             $db_pass = $username_pass['password'];
 
             $_SESSION['username'] = $username_pass['username'];
+            $_SESSION['fullname'] = $username_pass['fullname'];
+            $_SESSION['email'] = $username_pass['email'];
 
             $pass_decode = password_verify($password,$db_pass);
 
