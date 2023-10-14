@@ -115,3 +115,12 @@ span a{
     text-decoration: none;
     font-size: 15px;
 }
+
+.error-message {
+    background-color: #ffdddd;
+    border: 1px solid #ff9999;
+    color: #ff0000;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}

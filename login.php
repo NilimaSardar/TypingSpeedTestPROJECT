@@ -12,11 +12,14 @@ include 'links.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/login_reg.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
     <?php
     include 'connection.php';
+
+    $fname = $username = $email = '';
+    $errorMessages = array();
 
     if(isset($_POST['submit'])){
         $username=$_POST['username'];
@@ -52,10 +55,10 @@ include 'links.php';
                 }
             
             }else{
-                echo "password Incorrect";
+                $errorMessages[] = "Incorrect Password";
             }
         }else{
-            echo "Invalid username";
+            $errorMessages[] = "Invalid Username";
         }
     }
 
@@ -65,6 +68,11 @@ include 'links.php';
         <div class="top-header">
             <header>Login</header>
         </div>
+        <?php
+          foreach($errorMessages as $errorMessage) {
+            echo '<div class="error-message">' . $errorMessage . '</div>';
+          }
+          ?>
         
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
         <div class="input-field">
@@ -87,7 +95,7 @@ include 'links.php';
                 <label for="check">Remember Me</label>
             </div>
             <div class="right">
-                <label><a href="#"><a href="forget_password">Forgot password?</a></label>
+                <label><a href="forgot_password.php">Forgot password?</a></label>
             </div>
         </div>
 

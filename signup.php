@@ -8,12 +8,15 @@ include 'links.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
-    <link rel="stylesheet" href="css/login_reg.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
 <?php
 
 include 'connection.php';
+
+$fname = $username = $email = '';
+$errorMessages = array();
 
 if(isset($_POST['submit'])){
   $fname = mysqli_real_escape_string($conn,$_POST['fname']);
@@ -22,79 +25,87 @@ if(isset($_POST['submit'])){
   $password = mysqli_real_escape_string($conn,$_POST['password']);
   $Rpassword = mysqli_real_escape_string($conn,$_POST['Rpassword']);
 
-  $pass = password_hash($password, PASSWORD_BCRYPT);
-  $Rpass = password_hash($Rpassword, PASSWORD_BCRYPT);
-
-  $usernamequery = " select * from registration where username = '$username'";
-  $Uquery = mysqli_query($conn,$usernamequery);
-
-  $usercount = mysqli_num_rows($Uquery);
-
-  $emailquery = " select * from registration where email = '$email'";
-  $query = mysqli_query($conn,$emailquery);
-
-  $emailcount = mysqli_num_rows($query);
-
-  if($usercount>0){
-    echo "username already exists";
-  }elseif($emailcount>0){
-      echo "email already exists";
-    }else{
-    if($password === $Rpassword){
-
-      $insertquery = "insert into registration(fullname,username,email,password,Rpassword)
-       values('$fname','$username','$email','$pass','$Rpass')";
-
-      $iquery = mysqli_query($conn,$insertquery);
-
-      if($iquery){
-          ?>
-          <script>
-          alert ("Inserted successful");
-          </script>
-          <?php
-      }else{
-          //echo "No Inserted";
-          die("No Inserted".mysqli_connect_error());
-      }
-
-    }else{
-      //echo "password are not matching";
-      ?>
-      <script>
-        alert ("password are not matching");
-      </script>
-      <?php
-    }
-  }
-  header('location:login.php');
-}
-?>
+   // Password requirements
+   $password_min_length = 8; // Minimum password length
+   $password_complexity = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])/';
+ 
+   // Email validation regular expression
+   $email_regex = '/^\S+@\S+\.\S+$/';
+ 
+   $pass = password_hash($password, PASSWORD_BCRYPT);
+   $Rpass = password_hash($Rpassword, PASSWORD_BCRYPT);
+ 
+   $usernamequery = "SELECT * FROM registration WHERE username = '$username'";
+   $Uquery = mysqli_query($conn,$usernamequery);
+ 
+   $usercount = mysqli_num_rows($Uquery);
+ 
+   $emailquery = "SELECT * FROM registration WHERE email = '$email'";
+   $query = mysqli_query($conn,$emailquery);
+ 
+   $emailcount = mysqli_num_rows($query);
+ 
+   if($usercount > 0){
+     $errorMessages[] = "Username already exists";
+   } elseif($emailcount > 0){
+     $errorMessages[] = "Email already exists";
+   } elseif (!preg_match($email_regex, $email)) {
+     $errorMessages[] = "Invalid email format. Please enter a valid email address.";
+   } elseif (strlen($password) < $password_min_length) {
+     $errorMessages[] = "Password is too short. It must be at least $password_min_length characters long.";
+   } elseif (!preg_match($password_complexity, $password)) {
+     $errorMessages[] = "Password must include at least one lowercase letter, one uppercase letter, one number, and one special character.";
+   } elseif($password !== $Rpassword) {
+     $errorMessages[] = "Passwords do not match";
+   } else {
+     $insertquery = "INSERT INTO registration(fullname,username,email,password,Rpassword)
+       VALUES('$fname','$username','$email','$pass','$Rpass')";
+ 
+     $iquery = mysqli_query($conn,$insertquery);
+ 
+     if($iquery){
+       ?>
+       <script>
+       alert("Registered successfully");
+       window.location = 'login.php'; // Redirect after showing the alert
+       </script>
+       <?php
+     } else {
+       die("Not inserted: " . mysqli_error($conn));
+     }
+   }
+ }
+ ?>
 
     <div class="box">
         <div class="container">
           <div class="top_header">
             <header>Create your account</header>
           </div>
+          <?php
+          foreach($errorMessages as $errorMessage) {
+            echo '<div class="error-message">' . $errorMessage . '</div>';
+          }
+          ?>
               <form action="" method="POST">
                 <div class="input_field">
-                  <input type="text" class="input" name="fname" placeholder="Full Name" />
+                  <input type="text" class="input" name="fname" placeholder="Full Name" value="<?php echo $fname; ?>" />
                   <i aria-hidden="true" class="fa fa-user"></i>
                 </div>
                 <div class="input_field">
-                  <input type="text" class="input" name="username" placeholder="User Name" required />
+                  <input type="text" class="input" name="username" placeholder="User Name" value="<?php echo $username; ?>"/>
                   <i aria-hidden="true" class="fa fa-user"></i>
                 </div>
-                <div class="input_field"> 
-                  <input type="email" class="input" name="email" placeholder="Email" required />
+                <div class "input_field"> 
+                  <input type="email" class="input" name="email" placeholder="Email" value="<?php echo $email; ?>"/>
                   <i aria-hidden="true" class="fa fa-envelope"></i>
                 </div>
                 <div class="input_field">
-                  <input type="password" class="input" name="password" placeholder="Password" required />
+                  <input type="password" class="input" name="password" placeholder="Password"/>
                   <i aria-hidden="true" class="fa fa-lock"></i>
                 </div>
                 <div class="input_field">
-                  <input type="password" class="input" name="Rpassword" placeholder="Re-type Password" required />
+                  <input type="password" class="input" name="Rpassword" placeholder="Re-type Password"/>
                   <i aria-hidden="true" class="fa fa-lock"></i>
                 </div>
                 
@@ -102,7 +113,7 @@ if(isset($_POST['submit'])){
                   <div class="left">
                     <input type="checkbox" id="check">
                     <label for="check">I agree with <a href="#">terms & conditions</a></label>
-                    </div>
+                  </div>
                 </div>
                 <span>
                 <input class="submit" type="submit" name="submit" value="Register" />

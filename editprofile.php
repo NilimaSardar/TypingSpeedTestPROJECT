@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
             <input type="submit" name="submit" value="Update">
         </div>
     </form>
-    <a href="changepassword.php">Change Password</a>
+    <a href="change_password.php">Change Password</a>
     <a href="profile.php">Back to Your Profile</a>
 </body>
 </html>
