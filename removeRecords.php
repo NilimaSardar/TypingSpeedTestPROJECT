@@ -1,5 +1,15 @@
 <?php
 session_start();
+$page_title="Remove Records";
+
+if(!isset($_SESSION['username'])){
+    ?>
+        <script>
+            alert('You are logged out');
+            window.location = 'login.php';
+        </script>
+    <?php
+}
 
 include 'connection.php';
 
@@ -24,7 +34,7 @@ if (isset($_POST['remove'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remove Records</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
 </head>
 <body>
     <h1>Remove All Previous Records</h1>

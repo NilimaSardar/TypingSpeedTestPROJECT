@@ -1,5 +1,6 @@
 <?php
 session_start();
+$page_title="Login";
 ?>
 
 <?php
@@ -11,7 +12,7 @@ include 'links.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
     <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
@@ -24,6 +25,15 @@ include 'links.php';
     if(isset($_POST['submit'])){
         $username=$_POST['username'];
         $password=$_POST['password'];
+
+        //for time spent
+        $loginTime = date('Y-m-d H:i:s');
+        $_SESSION['login_time'] = $loginTime;
+
+        // Insert the login record into the user_activity table
+        $insertLoginQuery = "INSERT INTO user_activity (username, login_time, logout_time, daily_usage)
+                             VALUES ('$username', '$loginTime', 0 , 0)";
+        mysqli_query($conn, $insertLoginQuery);
 
         $username_search = "select * from registration where username ='$username'";
         $query = mysqli_query($conn,$username_search);
@@ -90,10 +100,10 @@ include 'links.php';
         </div>
 
         <div class="bottom">
-            <div class="left">
+            <!--<div class="left">
                 <input type="checkbox" id="check" name="rememberme">
                 <label for="check">Remember Me</label>
-            </div>
+            </div>-->
             <div class="right">
                 <label><a href="forgot_password.php">Forgot password?</a></label>
             </div>

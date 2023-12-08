@@ -1,4 +1,5 @@
 <?php
+$page_title = "Register";
 include 'links.php';
 ?>
 
@@ -7,7 +8,7 @@ include 'links.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
     <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
@@ -96,7 +97,7 @@ if(isset($_POST['submit'])){
                   <input type="text" class="input" name="username" placeholder="User Name" value="<?php echo $username; ?>"/>
                   <i aria-hidden="true" class="fa fa-user"></i>
                 </div>
-                <div class "input_field"> 
+                <div class="input_field"> 
                   <input type="email" class="input" name="email" placeholder="Email" value="<?php echo $email; ?>"/>
                   <i aria-hidden="true" class="fa fa-envelope"></i>
                 </div>
@@ -109,12 +110,12 @@ if(isset($_POST['submit'])){
                   <i aria-hidden="true" class="fa fa-lock"></i>
                 </div>
                 
-                <div class="bottom">
+                <!--<div class="bottom">
                   <div class="left">
                     <input type="checkbox" id="check">
                     <label for="check">I agree with <a href="#">terms & conditions</a></label>
                   </div>
-                </div>
+                </div>-->
                 <span>
                 <input class="submit" type="submit" name="submit" value="Register" />
                 </span>

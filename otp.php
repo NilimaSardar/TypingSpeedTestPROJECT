@@ -1,5 +1,6 @@
 <?php
 session_start();
+$page_title="Verify OTP";
 include 'links.php';
 include 'connection.php';
 
@@ -39,8 +40,8 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
-    <link rel="stylesheet" href="css/login_reg.css">
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
     <div class="box">

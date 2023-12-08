@@ -1,5 +1,15 @@
 <?php
 session_start();
+$page_title="Delete Account";
+
+if(!isset($_SESSION['username'])){
+    ?>
+        <script>
+            alert('You are logged out');
+            window.location = 'login.php';
+        </script>
+    <?php
+}
 
 include 'connection.php';
 
@@ -27,7 +37,7 @@ if (isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Account</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
 </head>
 <body>
     <h1>Delete Account</h1>

@@ -1,201 +1,16 @@
+<?php
+$page_title="Home";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <style>
-        *{
-        padding: 0;margin:0; box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        :root{
-            --clr-body-bg: #366a8d;
-            --clr-nav-bg: #a6c2d4;
-            --clr-box: indianred;
-            --clr-dropdown: #b1c9d7;
-            --clr-text: black;
-            --clr-text2: white;
-        }
-        header{
-            width: 100%;
-            height: 100vh;
-            background-color: var(--clr-body-bg);
-            background-size: cover;
-        }
-        nav{
-            width: 100%;
-            height: 100px;
-            background-color: var(--clr-nav-bg);
-            color: var(--clr-text);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .logo{
-            font-size: 2.5em;
-            letter-spacing: 2px;
-        }
-        .menu a{
-            text-decoration: none;
-            color: var(--clr-text);
-            opacity: 1;
-            padding: 10px 20px;
-            font-size: 22px;
-            font-weight: 500;
-            position: relative;
-        }
-        .menu a.active{
-            background: transparent;
-            border-bottom: 3px solid var(--clr-box);
-            color: var(--clr-text);
-            opacity: 1.5;
-            font-size: 22px;
-        }
-        .menu a:hover{
-            font-size: 24px;
-            font-weight: bold;
-            transition: 0.4s;
-        }
-        /* Add CSS for the themes dropdown container */
-        .themes-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Style the Themes link */
-        .theme-link {
-            text-decoration: none;
-            color: var(--clr-text);
-            opacity: 0.7;
-            padding: 10px 20px;
-            font-size: 22px;
-            font-weight: 500;
-        }
-
-        /* Style for the themes dropdown content */
-        .themes-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--clr-dropdown);
-            min-width: 120px;
-            border-radius: 0 0 1rem 1rem;
-            z-index: 1;
-            transition: 0.4s;
-        }
-
-        /* Style for each radio option in the dropdown */
-        .themes-dropdown-content label {
-            display: block;
-            padding: 5px 20px;
-            color: var(--clr-text);
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500px;
-        }
-
-        /* Show the themes dropdown content when hovering over the Themes link */
-        .themes-dropdown:hover .themes-dropdown-content {
-            display: block;
-        }
-
-        .menu input[type="radio"]{
-            appearance: none;
-        }
-        .menu label[for="default"]:hover{
-            color: #264b64;
-            font-size: 20px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .menu label[for="light"]:hover{
-            color: grey;
-            font-size: 20px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .menu label[for="green"]:hover, label[for="green"]:active{
-            color: green;
-            font-size: 20px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .menu label[for="pink"]:hover{
-            color:  rgb(248, 120, 141);
-            font-size: 20px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .menu label[for="dark"]:hover{
-            color: #232323;
-            font-size: 20px;
-            font-weight: bold;
-            opacity: 5;
-            transition: 0.2s;
-        }
-        .light,
-        :root:has(#light:checked){
-            --clr-body-bg: hsl(195, 76%, 84%);
-            --clr-nav-bg: hsl(209, 31%, 35%); 
-            --clr-box: hsl(209, 48%, 21%);
-            --clr-dropdown: hsl(209, 43%, 83%); 
-            --clr-text: hsl(209 50% 15%);
-            --clr-text2: hsl(209, 14%, 53%);
-        }
-        .dark,
-        :root:has(#dark:checked){
-            --clr-body-bg: hsl(208, 49%, 15%);
-            --clr-nav-bg: hsl(208, 81%, 20%); 
-            --clr-box: hsl(206, 18%, 69%);
-            --clr-dropdown: hsl(208, 14%, 53%); 
-            --clr-text: hsl(209 50% 90%);
-            --clr-text2: hsl(209, 50%, 53%);
-        }
-
-        .login_reg a{
-            text-decoration: none;
-            color: var(--clr-text2);
-            padding: 10px 20px;
-            font-size: 20px;
-            background: var(--clr-box);
-            border-radius: 8px;
-            transition: 0.4s;
-        }
-        .login_reg a:hover{
-            background: transparent;
-            border:1px solid var(--clr-box);
-            color: var(--clr-text);
-        }
-        .h-txt{
-            max-width: 650px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            text-align: center;
-            color: var(--clr-text2);
-        }
-        .h-txt span{
-            letter-spacing: 5px;
-        }
-        .h-txt h1{
-            font-size: 3.5em;
-        }
-        .h-txt a{
-            text-decoration: none;
-            background: var(--clr-box);
-            color: var(--clr-text2);
-            padding: 10px 20px;
-            letter-spacing: 5px;
-            transition: 0.4s;
-        }
-        .h-txt a:hover{
-            background: transparent;
-            border:1px solid var(--clr-box);
-            color: var(--clr-text);
-        }
-    </style>
     <header>
         <nav>
             <div class="logo">
@@ -203,32 +18,14 @@
             </div>
             <div class="menu">
                 <a class="active" href="#">Home</a>
-                <a href="test.php">Tests</a>
+                <a href="how_to.php">How to</a>
                 <a href="about.php">About</a>
-                <a href="#">Lang</a>
-
-                <div class="themes-dropdown">
-                    <a href="#" class="theme-link">Themes</a>
-                    <div class="themes-dropdown-content">
-                        <label for="default" class="theme">
-                            <input type="radio" name="theme" id="default" checked>
-                            Default
-                        </label>
-                        <label for="light" class="theme">
-                            <input type="radio" name="theme" id="light">
-                            Light
-                        </label>
-                        <label for="dark" class="theme">
-                            <input type="radio" name="theme" id="dark">
-                            Dark
-                        </label>
-                    </div>
-                </div>
             </div>
             <div class="login_reg">
                 <a href="signup.php">Register</a>
             </div>
         </nav>
+    </header>
         <section class="h-txt">
             <span>Hello!</span>
             <h1>Welcome to Typing World</h1>
@@ -236,7 +33,12 @@
             <br>
             <a href="login.php">Login</a>
         </section>
-    </header>
+        <div class="custom-shape-divider-bottom-1701435690">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
 </body>
-<script src="main.js"></script>
 </html>

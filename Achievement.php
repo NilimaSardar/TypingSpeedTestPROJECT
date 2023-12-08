@@ -1,5 +1,16 @@
 <?php
 session_start();
+$page_title="Achievements";
+
+if(!isset($_SESSION['username'])){
+    ?>
+        <script>
+            alert('You are logged out');
+            window.location = 'login.php';
+        </script>
+    <?php
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -7,50 +18,46 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements</title>
+    <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
+    <link rel="stylesheet" href="css/index.css">
     <style>
-        *{
-            box-sizing: border-box;
-        }
-        body{
-            margin: 40px;
-            font-family: 'Roboto', sans-serif;
-        }
-        .table_responsive{
-            max-width: 900px;
-            border: 1px solid #00bcd4;
-            background-color: #efefef33;
-            padding: 15px;
+        .table{
+            max-width: 1000px;
+            /* border: 1px solid #00bcd4; */
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            padding: 10px;
             overflow: auto;
             margin: auto;
-            border-radius: 4px;
+            border-radius: 7px;
         }
         h1{
+            font-size: 4rem;
+            font-weight: 700;
             text-transform: capitalize;
-            margin-bottom: 30px;
-            color: black;
-            text-shadow: 1px 2px 3px #2980b9;
-            font-size: 2.1rem;
+            margin:30px 0 30px 0;
+            color: #1A1A40;
+            font-size: 3.8rem;
             text-align: center;
         }
         table{
             width: 100%;
-            font-size: 15px;
-            color: #444;
+            font-size: 20px;
             white-space: nowrap;
             border-collapse: collapse;
+            table-layout: fixed;
         }
         table>thead{
-            background-color: #00bcd4;
+            background-color: indianred;
             color: #fff;
+            border: 1px solid #00000017;
         }
         table>thead th{
-            padding: 15px;
+            padding: 15px 20px 15px 0;
         }
         table th,
         table td{
             border: 1px solid #00000017;
-            padding: 10px 15px;
+            padding: 10px 40px;
         }
         table>tbody>tr{
             background-color: #fff;
@@ -67,9 +74,29 @@ session_start();
     </style>
 </head>
 <body>
+    <!-- NAVBAR Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                Typing-test
+            </div>
+            <div class="menu">
+                <a href="typingTest.php">Test</a>
+                <a href="profile.php">My Profile</a>
+                <a href="Achievement.php" class="active">Achievements</a>
+                <a href="time_spent.php">Time Spent</a>
+            </div>
+            <div class="register">
+                <div class="login_reg">
+                    <a href="editprofile.php">Edit Profile</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Ends NAVBAR Section -->
     <h1><?php echo $_SESSION['username']; ?>'s Achievements</h1>
     <br>
-    <div class="table_responsive">
+    <div class="table">
         <?php
         include 'connection.php';
         

@@ -1,0 +1,455 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+    /* 1rem=10px */
+}
+body{
+    overflow: hidden;
+}
+.container{
+    width:100%;
+    height: 100vh;
+    background-size: cover;
+    background: #366a8d;
+}
+h2{
+    font-size: 2.6rem;
+}
+/* Head of the page */
+
+.head-of-page{
+    width: 100%;
+    height: 15vh;
+    background-color: #a6c2d4;
+    position: relative;
+}
+/* Sidebar Start */
+.menu-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999 ;
+}
+.menu-container.hidden{
+    display: none;
+}
+.menu-container .bar{
+    font-size: 30px;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 0;
+    background: #3f5560;
+    overflow: hidden;
+    border-radius: 1rem;
+    transition: height 0.5s ease;
+    z-index: 998;
+}
+.sidebar.show {
+    height: 58vh;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+}
+.sidebar ul li {
+    text-align: left;
+    width: 15rem;
+    margin-bottom: 0;
+}
+.sidebar ul li:nth-child(1){
+    color: white;
+    font-weight: 800;
+    font-size: 3rem;
+}
+.sidebar ul li i{
+    margin-right: 1rem;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    display: none;
+    z-index: 997;
+}
+.sidebar.show ~ .overlay {
+    display: none;
+}
+/* sidebar end */
+
+.heading{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: #1A1A40;
+}
+
+.select-item{
+    position: absolute;
+    bottom: 0;
+    right: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 6.5rem; 
+
+    & .item{
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 2rem;
+        width: 20rem;
+      
+
+        & span{
+            margin-right: 0.3rem;
+            color: black;
+            font-weight: 550;
+            
+        }
+
+        & select{
+            padding: 0.8rem 1.5rem;
+            background-color: indianred;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: 0.1rem solid white;
+            box-shadow: 0 0 2rem rgba(20, 20, 30, 0.25);
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s linear;
+
+            &:hover{
+                background: transparent;
+                border:0.1rem solid #a6c2d4;
+                color: black;
+            }
+        }
+    }
+}
+/* End head of the page */
+
+/* sentences div */
+.main-body{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.sentence{
+    width: 100%;
+    height: 16vh;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .message{
+        position:relative;
+        /* background-color: grey; */
+        width:70rem;
+        height: 6rem;  
+        padding: 2rem  0;              
+
+        & .showing-msz{
+            position: absolute;
+            left: 10%;
+            
+            & h2{
+                color: #F3EEEA;
+            }
+        }
+    }
+    & .showing-score{
+        width:70rem;
+        height: 6rem;  
+        /* background-color: skyblue; */
+
+        & h2{
+            color: #D0F5BE;
+        }
+    }
+}
+
+.timer-div{
+    width:100%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    display: none;
+}
+#show-time{
+    font-size: 2.5rem;
+    color: white;
+    padding: 1.3rem;
+    text-align: right;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: .4rem solid indianred;
+}
+
+/* End sentences div */
+
+/* Actual-body Start */
+.actual-body{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+textarea{
+    background-color: #444;
+    /* box-shadow: 0 0 1px rgba(0,0,0,0.2); */
+    border-radius: 10px 10px 0 0;
+    border: 12px solid #34495e;
+    color: #F3EEEA;
+    font-size: 2.3rem;
+    resize: none;
+    margin: 1rem
+}
+/* Keyboard design */
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    /* background-color: green; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    margin: 2.2rem;
+}
+
+.row {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    height: 4.3rem;
+    width: 4.3rem;
+    color: black;
+    border-radius: 0.4rem;
+    line-height: 4rem;
+    letter-spacing: 0.1rem;
+    margin: 0.4rem;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#tab {
+    width: 11rem;
+}
+
+#caps {
+    width: 11rem;
+}
+
+#left-shift {
+    width: 13rem;
+}
+
+#enter {
+    width: 10rem;
+}
+
+#right-shift {
+    width: 13rem;
+}
+
+#back {
+    width: 11rem;
+}
+
+#space{
+    width: 40rem;
+}
+#alt,#win,#ctrl{
+    width: 5.5rem;
+}
+
+.pinky { 
+    background-color: #94bbe9;
+    border: 2px solid crimson;
+}
+.pinky.selected {
+    color: crimson;
+}
+
+.ring { 
+    background-color: #94bbe9;
+    border: 2px solid coral;
+}
+.ring.selected {
+    color: coral;
+}
+
+.middle { 
+    background-color: #eeaeca;
+    border: 2px solid darkorange;
+}
+.middle.selected {
+    color: darkorange;
+}
+
+.pointer1st { 
+    background-color: #eeaeca;
+    border: 2px solid gold;
+}
+.pointer1st.selected {
+    color: gold;
+}
+
+.pointer2nd { 
+    background-color: #eeaeca;
+    border: 2px solid khaki;
+}
+.pointer2nd.selected {
+    color: khaki;
+}
+
+.fill-out-key {
+    background-color: slategrey;
+    border: 2px solid slategrey;
+}
+
+.selected {
+    background-color: transparent;
+        -webkit-animation: vibrate-1 0.3s linear infinite both;
+            animation: vibrate-1 0.3s linear infinite both;
+}
+.keyboard li.wrong {
+    background-color: red;
+    color: white;
+}
+
+.hit {
+    -webkit-animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes hit {
+    0% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    }
+    100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    }
+}
+@keyframes hit {
+    0% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    }
+    100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    }
+}
+
+@-webkit-keyframes vibrate-1 {
+    0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    }
+    20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+    }
+    40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+    }
+    60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+    }
+    80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+    }
+    100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    }
+}
+@keyframes vibrate-1 {
+    0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    }
+    20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+    }
+    40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+    }
+    60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+    }
+    80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+    }
+    100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    }
+}
+/* Keyboard design ends */
+/* Actual-body ends */
+/* button */
+.mainbtn{
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    background: indianred;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.4s;
+
+    &:hover{
+        background: transparent;
+        border:1px solid indianred;
+        color: black;
+    }
+}

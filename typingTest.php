@@ -1,9 +1,14 @@
 <?php
 session_start();
+$page_title="";
 
 if(!isset($_SESSION['username'])){
-    echo "you are logged out";
-    header('location:index.php');
+    ?>
+        <script>
+            alert('You are logged out');
+            window.location = 'login.php';
+        </script>
+    <?php
 }
 
 include 'connection.php';
@@ -17,243 +22,301 @@ include 'connection.php';
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="JQuery.js"></script>
-    <style>
-        body{
-            font-family:  'Roboyo', sans-serif;
-        }
-        *{
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            text-decoration: none;
-        }
-        
-        .mainDiv{
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            background: #366a8d;
-        }
-
-        .centerDiv{
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 2;
-        }
-
-        h1{
-            text-transform: capitalize;
-            margin-bottom: 30px;
-            color: #ecf0f1;
-            text-shadow: 1px 2px 3px #2980b9;
-            font-size: 2.1rem;
-        }
-
-        h2{
-            text-align: center;
-        }
-
-        textarea{
-            background-color: #444;
-            box-shadow: 0 0 1px rgba(0,0,0,0.2);
-            border-radius: 10px 10px 0 0;
-            border: 20px solid #34495e;
-            color: white;
-            font-size: 1.3rem;
-        }
-
-        .mainbtn{
-            text-decoration: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 20px;
-            background: indianred;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.4s;
-        }
-        .mainbtn:hover{
-            background: transparent;
-            border:1px solid indianred;
-            color: black;
-        }
-        .timer-div{
-            width:100%;
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-        }
-        #show-time{
-            font-size: 1.5rem;
-            color: white;
-            padding: 1.3rem;
-            text-align: right;
-            width: 3rem;
-            height: 3rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: .3rem solid indianred;
-        }
-        .menu-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            z-index: 999 ;
-        }
-        .menu-container.hidden{
-            display: none;
-        }
-        .menu-container .bar{
-            font-size: 30px;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            height: 0;
-            background: #3f5560;
-            overflow: hidden;
-            transition: height 0.5s ease;
-            z-index: 998;
-        }
-        .sidebar.show {
-            height: calc(50vh - 40px);
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 20px;
-            margin: 0;
-        }
-        .sidebar ul li {
-            margin-bottom: 20px;
-        }
-        .sidebar ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 997;
-        }
-        .sidebar.show ~ .overlay {
-            display: block;
-        }
-
-        .nav-bar {
-            position: absolute;
-            top: 20px;
-            right: 70px; 
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            z-index: 1;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .nav-item span {
-            margin-right: 10px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/typingTest.css">
 </head>
 <body>
-<div class="mainDiv">
+    <div class="container">
+        <div class="head-of-page">
 
-<div class="menu-container" id="menuContainer" onclick="toggleSidebar()">
-        <i class="fa fa-bars bar"></i>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="profile.php">My Profile</a></li>
-            <li><a href="Achievement.php">Achievements</a></li>
-            <li><a href="#">Feedback</a></li>
-            <li><a href="#">Time Spent</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </div>
-    <div class="overlay" onclick="toggleSidebar()"></div>
-    <script>
-        var menuContainer = document.getElementById("menuContainer");
+            <div class="menu-container hidden-element" id="menuContainer" onclick="toggleSidebar()">
+                <i class="fa fa-bars bar"></i>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>MENU</li>
+                    <li><a href="profile.php"><i class="fa fa-user"></i>My Profile</a></li>
+                    <li><a href="Achievement.php"><i class="fa fa-trophy"></i>Achievements</a></li>
+                    <li><a href="feedback.php"><i class="fa fa-"><i class="fa fa-comment"></i>Feedback</a></li>
+                    <li><a href="time_spent.php"><i class="fa fa-bar-chart"></i>Time Spent</a></li>
+                    <li><a href="about.php"><i class="fa fa-question-circle"></i>About</a></li>
+                    <li><a href="how_to.php"><i class="fa fa-spinner"></i>How to</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out"></i>Logout</a></li>
+                </ul>
+            </div>
+            <div class="overlay" onclick="toggleSidebar()"></div>
 
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            var overlay = document.querySelector(".overlay");
-            sidebar.classList.toggle("show");
-            overlay.style.display = sidebar.classList.contains("show") ? "block" : "none";
+            <script>
+                var menuContainer = document.getElementById("menuContainer");
 
-            menuContainer.classList.toggle("hidden",sidebar.classList.contains("show"));
-        }
-    </script>
-        <div class="centerDiv">
-            <h1>Welcome To Typing Speed Test <?php echo $_SESSION['username']; ?></h1>
+                function toggleSidebar() {
+                    var sidebar = document.getElementById("sidebar");
+                    var overlay = document.querySelector(".overlay");
+                    sidebar.classList.toggle("show");
+                    overlay.style.display = sidebar.classList.contains("show") ? "block" : "none";
 
-            <div class="timer-div">
-                <p id="show-time"></p>
+                    menuContainer.classList.toggle("hidden",sidebar.classList.contains("show"));
+                }
+            </script>
+
+
+            <div class="heading">
+            <h1>Welcome To Typing Speed Test</h1>
             </div>
 
-            <h2 id="msz"></h2>
-            <h2 id="score"></h2>
-            <br>
-            <textarea id="myWords" cols="80" rows="10" placeholder="Remember, be nice!" disabled></textarea>
-            <br>
-            <button id="btn" class="mainbtn">Start</button>
+            <div class="select-item">
+                <div class="item">
+                    <span>Language:</span>
+                    <select id="languageSelect" onchange="updateLevel(this.value)">
+                        <option>Select Any one</option>
+                          <?php
+                                $q="select * from language";
+                                $result = mysqli_query($conn,$q);
+                                while($rows = mysqli_fetch_array($result)){
+                                    ?>
+                                    <option value="<?php echo $rows['Langid']; ?>"><?php echo $rows['language']; ?></option>
+                                    <?php
+                                }
+                          ?>
+                    </select>
+                </div>
+                <div class="item">
+                    <span>Level:</span>
+                    <select id="levelSelect" onchange="updateSentences()">
+                        <option value="">Select Any one</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <?php
-        include 'footer1.php';
-        ?>
+        <div class="main-body">
+            <div class="sentence">
+
+                <div class="message">
+                    <div class="showing-msz">
+                        <h2 id="msz">Select Language and Level and click on start</h2>
+                    </div>
+                    <div class="timer-div">
+                        <p id="show-time"></p>
+                    </div>
+                </div>
+
+                <div class="showing-score">
+                    <h2 id="score"></h2>
+                </div>
+
+            </div>
+
+            <div class="actual-body">
+                <div class="textarea">
+                    <textarea id="myWords" cols="50" rows="3" placeholder="Remember, be nice!" disabled></textarea>
+                </div>
+
+                <div class="keyboard">
+                    <ul class="row row-0">
+                        <li class="pinky" id="backtick">`</li>
+                        <li class="pinky" id="1">1</li>
+                        <li class="ring" id="2">2</li>
+                        <li class="middle" id="3">3</li>
+                        <li class="pointer1st" id="4">4</li>
+                        <li class="pointer2nd" id="5">5</li>
+                        <li class="pointer2nd" id="6">6</li>
+                        <li class="pointer1st" id="7">7</li>
+                        <li class="middle" id="8">8</li>
+                        <li class="ring" id="9">9</li>
+                        <li class="pinky" id="10">0</li>
+                        <li class="pinky" id="sub">-</li>
+                        <li class="pinky" id="add">+</li>
+                        <li class="pinky" id="back">backspace</li>
+                    </ul>
+                    <ul class="row row-1">
+                        <li class="pinky" id="tab">tab</li>
+                        <li class="pinky" id="Q">Q</li>
+                        <li class="ring" id="W">W</li>
+                        <li class="middle" id="E">E</li>
+                        <li class="pointer1st" id="R">R</li>
+                        <li class="pointer2nd" id="T">T</li>
+                        <li class="pointer2nd" id="Y">Y</li>
+                        <li class="pointer1st" id="U">U</li>
+                        <li class="middle" id="I">I</li>
+                        <li class="ring" id="O">O</li>
+                        <li class="pinky" id="P">P</li>
+                        <li class="pinky" id="open-bracket">[</li>
+                        <li class="pinky" id="close-bracket">]</li>
+                        <li class="pinky" id="slash">\</li>
+                    </ul>
+                    <ul class="row row-2">
+                        <li class="pinky" id="caps">caps lock</li>
+                        <li class="pinky" id="A">A</li>
+                        <li class="ring" id="S">S</li>
+                        <li class="middle" id="D">D</li>
+                        <li class="pointer1st" id="F">F</li>
+                        <li class="pointer2nd" id="G">G</li>
+                        <li class="pointer2nd" id="H">H</li>
+                        <li class="pointer1st" id="J">J</li>
+                        <li class="middle" id="K">K</li>
+                        <li class="ring" id="L">L</li>
+                        <li class="pinky" id="colon">:</li>
+                        <li class="pinky" id="colon2">"</li>
+                        <li class="pinky" id="enter">enter</li>
+                    </ul>
+                    <ul class="row row-3">
+                        <li class="pinky" id="left-shift">shift</li>
+                        <li class="pinky" id="Z">Z</li>
+                        <li class="ring" id="X">X</li>
+                        <li class="middle" id="C">C</li>
+                        <li class="pointer1st" id="V">V</li>
+                        <li class="pointer2nd" id="B">B</li>
+                        <li class="pointer2nd" id="N">N</li>
+                        <li class="pointer1st" id="M">M</li>
+                        <li class="middle" id="coma">,</li>
+                        <li class="ring" id="dot">.</li>
+                        <li class="pinky" id="semi-colon">;</li>
+                        <li class="pinky" id="right-shift">shift</li>
+                    </ul>
+                    <ul class="row row-4">
+                        <li class="pinky" id="ctrl">ctrl</li>
+                        <li class="ring" id="win">win</li>
+                        <li class="middle" id="alt">alt</li>
+                        <li class="pointer1st" id="space">space</li>
+                        <li class="middle" id="alt">alt</li>
+                        <li class="ring" id="win">win</li>
+                        <li class="pinky" id="ctrl">ctrl</li>
+                    </ul>
+                </div>
+
+                <div class="main-btn">
+                    <button id="btn" class="mainbtn">Start</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="nav-bar">
-    <div class="nav-item">
-        <span>Language:</span>
-        <select id="languageSelect" onchange="updateLevel(this.value)">
-            <option>Select Any one</option>
-                        <?php
-                        $q="select * from language";
-                        $result = mysqli_query($conn,$q);
-                        while($rows = mysqli_fetch_array($result)){
-                            ?>
-                            <option value="<?php echo $rows['Langid']; ?>"><?php echo $rows['language']; ?></option>
-                            <?php
-                        }
-                        ?>
-        </select>
-    </div>
-    <div class="nav-item">
-        <span>Level:</span>
-        <select id="levelSelect" onchange="updateSentences()">
-            <option value="">Select Any one</option>
-        </select>
-    </div>
-</div>
     <script type="text/javascript">
+        // Keybord
+
+    // Function to handle Caps Lock
+    function toggleCapsLock() {
+        const capsLockKey = document.getElementById('caps');
+        capsLockKey.classList.toggle('active');
+
+        // Update keyboard keys to reflect Caps Lock state
+        const keyboardKeys = document.querySelectorAll('.keyboard li');
+        keyboardKeys.forEach(key => {
+            const isLetter = /^[a-zA-Z]$/.test(key.innerText);
+            if (isLetter) {
+                key.innerText = capsLockKey.classList.contains('active') ? key.innerText.toUpperCase() : key.innerText.toLowerCase();
+            }
+        });
+    }
+    // Event listener for Caps Lock
+    document.getElementById('caps').addEventListener('click', function () {
+        toggleCapsLock();
+    });
+
+    // Event listener for keydown to handle Caps Lock and Shift
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'CapsLock') {
+            toggleCapsLock();
+        } else if (event.key === 'Shift') {
+            toggleShift();
+        }
+    });
+
+        function highlightKeys(currentChar) {
+            // Remove previous highlights
+            document.querySelectorAll('.keyboard li').forEach(key => {
+                key.classList.remove('selected' ,'wrong');
+            });
+
+            // Highlight the current key
+            const keyElement = document.getElementById(currentChar.toUpperCase());
+                if (keyElement) {
+                    keyElement.classList.add('selected');
+                }
+                // Special handling for spacebar
+                if (currentChar === '.') {
+                    const dotKey = document.getElementById('dot');
+                    if (dotKey) {
+                        dotKey.classList.add('selected');
+                    }
+                }
+                // Update the ID in the JavaScript function
+                if (currentChar === '`') {
+                    const backtickKey = document.getElementById('backtick');
+                    if (backtickKey) {
+                        backtickKey.classList.add('selected');
+                    }
+                }
+
+                if (currentChar === ' ') {
+                    const spaceKey = document.getElementById('space');
+                    if (spaceKey) {
+                        spaceKey.classList.add('selected');
+                    }
+                }
+    
+        }
+        
+        
+        let lastCorrectIndex = 0;
+
+document.addEventListener("keyup", event => {
+    // Check for the backspace key
+    if (event.key === 'Backspace') {
+        // Handle backspace logic here
+        if (currentIndex > 0) {
+            // Remove the 'selected' class from the current key
+            const currentChar = showSentence.innerText[currentIndex];
+            const currentKey = document.getElementById(currentChar.toUpperCase());
+            if (currentKey) {
+                currentKey.classList.remove('selected', 'wrong');
+            }
+
+            // Move the currentIndex back to the last correct index
+            currentIndex = lastCorrectIndex;
+
+            // Highlight the key for the current index without moving it
+            const prevChar = showSentence.innerText[currentIndex];
+            highlightKeys(prevChar);
+        }
+        return; // Don't proceed with the regular key handling
+    }
+
+
+
+            let keyPressed;
+
+            // Check for the backtick key separately
+            if (event.key === '`') {
+                keyPressed = '`';
+            } else {
+                keyPressed = String.fromCharCode(event.keyCode);
+            }
+            // const keyPressed = String.fromCharCode(event.keyCode);
+            const highlightedKey = document.querySelector(".selected");
+
+            // Check if the correct key is pressed
+                if (keyPressed === highlightedKey.innerHTML|| (keyPressed === ' ' && highlightedKey.id === 'space')){
+                    // Increment the index
+                    currentIndex++;
+
+                    // Update the last correct index
+                    lastCorrectIndex = currentIndex;
+
+                    // Highlight the next key if there is one
+                    if (currentIndex < showSentence.innerText.length) {
+                        const nextChar = showSentence.innerText[currentIndex];
+                        highlightKeys(nextChar);
+                    } else{
+                        // End the typing test when the sentence is complete
+                        endTypingTest();
+                    }
+                }else {
+                    // Add the 'wrong' class to the pressed key if there is a mistake
+                    highlightedKey.classList.add('wrong');
+                }
+        });
+        // Keybord
+        
         //STEP 1
         // selecting the neccessary elements using their respective
         // ids and creating variables to store the start Time,
@@ -394,8 +457,17 @@ include 'connection.php';
 
             calculateTypingSpeed(totalTimeTaken);
 
-            showSentence.innerHTML = "";
-            typing_ground.value = "";
+            // Hide the timer-div content
+            document.querySelector('.timer-div').style.display = 'none';
+
+            // showSentence.innerHTML = "";
+            // typing_ground.value = "";
+
+            // Disable the textarea
+            typing_ground.setAttribute('disabled', 'true');
+
+            // Remove the 'selected' class from all keys
+            document.querySelectorAll('.keyboard li').forEach(key => key.classList.remove('selected','wrong'));
             
         }
         //STEP 6
@@ -414,21 +486,42 @@ include 'connection.php';
             }
         }
 
+
         //STEP 3
         //Defining a function startTypingTest to generate a random sentence
         //from an array of sentences, show the sentence in the show_sentence
         //div. get the startime and change the button text to "Done".
 
+        let currentIndex = 0;
+
         const startTypingTest = () =>{
+            currentIndex = 0;
             let randomNumber = Math.floor(Math.random()*sentences.length);
             //console.log(randomNumber);
             showSentence.innerHTML = sentences[randomNumber].sentence;
 
+            // Highlight the first key
+            const firstChar = showSentence.innerText[0];
+            highlightKeys(firstChar);
+
             let date = new Date();
             startTime = date.getTime();
 
+             // Enable the textarea
+            typing_ground.removeAttribute('disabled');
+            // Clear the previous content of the textarea
+            typing_ground.value = "";
+            // Focus on the textarea for user convenience
+            typing_ground.focus();
+
             btn.innerText = "Done";
             score.innerHTML = "";
+
+            // Hide the cursor after the test ends
+    typing_ground.style.caretColor = 'transparent';
+
+            // Show the timer-div content
+            document.querySelector('.timer-div').style.display = 'flex';
 
             //adding Timer
             showTimer();
