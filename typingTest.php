@@ -111,7 +111,7 @@ include 'connection.php';
                     <textarea id="myWords" cols="50" rows="3" placeholder="Remember, be nice!" disabled></textarea>
                 </div>
 
-                <div class="keyboard">
+                <div class="keyboard english-Keyboard" id="englishKeyboard">
                     <ul class="row row-0">
                         <li class="pinky" id="backtick">`</li>
                         <li class="pinky" id="1">1</li>
@@ -184,6 +184,79 @@ include 'connection.php';
                     </ul>
                 </div>
 
+                <div class="keyboard nepali-Keyboard" id="nepaliKeyboard" style="display:none;">
+                    <ul class="row row-0">
+                        <li class="pinky" id="backtick">ञ</li>
+                        <li class="pinky" id="1">ज्ञ</li>
+                        <li class="ring" id="2">घ</li>
+                        <li class="middle" id="3">ङ</li>
+                        <li class="pointer1st" id="4">झ</li>
+                        <li class="pointer2nd" id="5">छ</li>
+                        <li class="pointer2nd" id="6">ट</li>
+                        <li class="pointer1st" id="7">ठ</li>
+                        <li class="middle" id="8">ड</li>
+                        <li class="ring" id="9">ढ</li>
+                        <li class="pinky" id="10">ण</li>
+                        <li class="pinky" id="sub">-</li>
+                        <li class="pinky" id="add">+</li>
+                        <li class="pinky" id="back">backspace</li>
+                    </ul>
+                    <ul class="row row-1">
+                        <li class="pinky" id="tab">tab</li>
+                        <li class="pinky" id="Q">त्र</li>
+                        <li class="ring" id="W">ध</li>
+                        <li class="middle" id="E">भ</li>
+                        <li class="pointer1st" id="R">च</li>
+                        <li class="pointer2nd" id="T">त</li>
+                        <li class="pointer2nd" id="Y">थ</li>
+                        <li class="pointer1st" id="U">ग</li>
+                        <li class="middle" id="I">ष</li>
+                        <li class="ring" id="O">य</li>
+                        <li class="pinky" id="P">उ</li>
+                        <li class="pinky" id="open-bracket">[</li>
+                        <li class="pinky" id="close-bracket">]</li>
+                        <li class="pinky" id="slash">\</li>
+                    </ul>
+                    <ul class="row row-2">
+                        <li class="pinky" id="caps">caps lock</li>
+                        <li class="pinky" id="A">ब</li>
+                        <li class="ring" id="S">क</li>
+                        <li class="middle" id="D">म</li>
+                        <li class="pointer1st" id="F">ा</li>
+                        <li class="pointer2nd" id="G">न</li>
+                        <li class="pointer2nd" id="H">ज</li>
+                        <li class="pointer1st" id="J">व</li>
+                        <li class="middle" id="K">प</li>
+                        <li class="ring" id="L">ि</li>
+                        <li class="pinky" id="colon">स</li>
+                        <li class="pinky" id="colon2">ु</li>
+                        <li class="pinky" id="enter">enter</li>
+                    </ul>
+                    <ul class="row row-3">
+                        <li class="pinky" id="left-shift">shift</li>
+                        <li class="pinky" id="Z">श</li>
+                        <li class="ring" id="X">ह</li>
+                        <li class="middle" id="C">अ</li>
+                        <li class="pointer1st" id="V">ख</li>
+                        <li class="pointer2nd" id="B">द</li>
+                        <li class="pointer2nd" id="N">ल</li>
+                        <li class="pointer1st" id="M">फ</li>
+                        <li class="middle" id="coma">,</li>
+                        <li class="ring" id="dot">.</li>
+                        <li class="pinky" id="semi-colon">;</li>
+                        <li class="pinky" id="right-shift">shift</li>
+                    </ul>
+                    <ul class="row row-4">
+                        <li class="pinky" id="ctrl">ctrl</li>
+                        <li class="ring" id="win">win</li>
+                        <li class="middle" id="alt">alt</li>
+                        <li class="pointer1st" id="space">space</li>
+                        <li class="middle" id="alt">alt</li>
+                        <li class="ring" id="win">win</li>
+                        <li class="pinky" id="ctrl">ctrl</li>
+                    </ul>
+                </div>
+
                 <div class="main-btn">
                     <button id="btn" class="mainbtn">Start</button>
                 </div>
@@ -193,33 +266,48 @@ include 'connection.php';
     <script type="text/javascript">
         // Keybord
 
-    // Function to handle Caps Lock
-    function toggleCapsLock() {
-        const capsLockKey = document.getElementById('caps');
-        capsLockKey.classList.toggle('active');
+        // Function to toggle between English and Nepali keyboards
+        function toggleKeyboard(language) {
+            const englishKeyboard = document.getElementById("englishKeyboard");
+            const nepaliKeyboard = document.getElementById("nepaliKeyboard");
 
-        // Update keyboard keys to reflect Caps Lock state
-        const keyboardKeys = document.querySelectorAll('.keyboard li');
-        keyboardKeys.forEach(key => {
-            const isLetter = /^[a-zA-Z]$/.test(key.innerText);
-            if (isLetter) {
-                key.innerText = capsLockKey.classList.contains('active') ? key.innerText.toUpperCase() : key.innerText.toLowerCase();
+            if (language === 'Nepali') {
+                englishKeyboard.style.display = 'none';
+                nepaliKeyboard.style.display = 'block';
+            } else {
+                nepaliKeyboard.style.display = 'none';
+                englishKeyboard.style.display = 'block';
+            }
+            console.log("Toggle Keyboard Function Called with Language:", language);
+        }
+
+        // Function to handle Caps Lock
+        function toggleCapsLock() {
+            const capsLockKey = document.getElementById('caps');
+            capsLockKey.classList.toggle('active');
+
+            // Update keyboard keys to reflect Caps Lock state
+            const keyboardKeys = document.querySelectorAll('.keyboard li');
+            keyboardKeys.forEach(key => {
+                const isLetter = /^[a-zA-Z]$/.test(key.innerText);
+                if (isLetter) {
+                    key.innerText = capsLockKey.classList.contains('active') ? key.innerText.toUpperCase() : key.innerText.toLowerCase();
+                }
+            });
+        }
+        // Event listener for Caps Lock
+        document.getElementById('caps').addEventListener('click', function () {
+            toggleCapsLock();
+        });
+
+        // Event listener for keydown to handle Caps Lock and Shift
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'CapsLock') {
+                toggleCapsLock();
+            } else if (event.key === 'Shift') {
+                toggleShift();
             }
         });
-    }
-    // Event listener for Caps Lock
-    document.getElementById('caps').addEventListener('click', function () {
-        toggleCapsLock();
-    });
-
-    // Event listener for keydown to handle Caps Lock and Shift
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'CapsLock') {
-            toggleCapsLock();
-        } else if (event.key === 'Shift') {
-            toggleShift();
-        }
-    });
 
         function highlightKeys(currentChar) {
             // Remove previous highlights
@@ -229,57 +317,57 @@ include 'connection.php';
 
             // Highlight the current key
             const keyElement = document.getElementById(currentChar.toUpperCase());
-                if (keyElement) {
-                    keyElement.classList.add('selected');
+            if (keyElement) {
+                keyElement.classList.add('selected');
+            }
+            // Special handling for spacebar
+            if (currentChar === '.') {
+                const dotKey = document.getElementById('dot');
+                if (dotKey) {
+                    dotKey.classList.add('selected');
                 }
-                // Special handling for spacebar
-                if (currentChar === '.') {
-                    const dotKey = document.getElementById('dot');
-                    if (dotKey) {
-                        dotKey.classList.add('selected');
-                    }
+            }
+            // Update the ID in the JavaScript function
+            if (currentChar === '`') {
+                const backtickKey = document.getElementById('backtick');
+                if (backtickKey) {
+                    backtickKey.classList.add('selected');
                 }
-                // Update the ID in the JavaScript function
-                if (currentChar === '`') {
-                    const backtickKey = document.getElementById('backtick');
-                    if (backtickKey) {
-                        backtickKey.classList.add('selected');
-                    }
-                }
+            }
 
-                if (currentChar === ' ') {
-                    const spaceKey = document.getElementById('space');
-                    if (spaceKey) {
-                        spaceKey.classList.add('selected');
-                    }
+            if (currentChar === ' ') {
+                const spaceKey = document.getElementById('space');
+                if (spaceKey) {
+                    spaceKey.classList.add('selected');
                 }
+            }
     
         }
         
         
         let lastCorrectIndex = 0;
 
-document.addEventListener("keyup", event => {
-    // Check for the backspace key
-    if (event.key === 'Backspace') {
-        // Handle backspace logic here
-        if (currentIndex > 0) {
-            // Remove the 'selected' class from the current key
-            const currentChar = showSentence.innerText[currentIndex];
-            const currentKey = document.getElementById(currentChar.toUpperCase());
-            if (currentKey) {
-                currentKey.classList.remove('selected', 'wrong');
+        document.addEventListener("keyup", event => {
+            // Check for the backspace key
+            if (event.key === 'Backspace') {
+                // Handle backspace logic here
+                if (currentIndex > 0) {
+                    // Remove the 'selected' class from the current key
+                    const currentChar = showSentence.innerText[currentIndex];
+                    const currentKey = document.getElementById(currentChar.toUpperCase());
+                    if (currentKey) {
+                        currentKey.classList.remove('selected', 'wrong');
+                    }
+
+                    // Move the currentIndex back to the last correct index
+                    currentIndex = lastCorrectIndex;
+
+                    // Highlight the key for the current index without moving it
+                    const prevChar = showSentence.innerText[currentIndex];
+                    highlightKeys(prevChar);
+                }
+                return; // Don't proceed with the regular key handling
             }
-
-            // Move the currentIndex back to the last correct index
-            currentIndex = lastCorrectIndex;
-
-            // Highlight the key for the current index without moving it
-            const prevChar = showSentence.innerText[currentIndex];
-            highlightKeys(prevChar);
-        }
-        return; // Don't proceed with the regular key handling
-    }
 
 
 
@@ -353,6 +441,12 @@ document.addEventListener("keyup", event => {
                     });
                 }
             });
+
+           // Get the selected language name
+           const selectedLanguageName = $("#languageSelect option:selected").text();
+
+            // Pass the language name to toggleKeyboard
+            toggleKeyboard(selectedLanguageName);
         }
 
         let sentences = [];
@@ -516,9 +610,6 @@ document.addEventListener("keyup", event => {
 
             btn.innerText = "Done";
             score.innerHTML = "";
-
-            // Hide the cursor after the test ends
-    typing_ground.style.caretColor = 'transparent';
 
             // Show the timer-div content
             document.querySelector('.timer-div').style.display = 'flex';
