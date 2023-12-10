@@ -23,6 +23,11 @@ include 'connection.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="JQuery.js"></script>
     <link rel="stylesheet" href="css/typingTest.css">
+    <style>
+        .sidebar.show {
+    height: 38vh;
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -36,10 +41,7 @@ include 'connection.php';
                     <li>MENU</li>
                     <li><a href="profile.php"><i class="fa fa-user"></i>My Profile</a></li>
                     <li><a href="Achievement.php"><i class="fa fa-trophy"></i>Achievements</a></li>
-                    <li><a href="feedback.php"><i class="fa fa-"><i class="fa fa-comment"></i>Feedback</a></li>
                     <li><a href="time_spent.php"><i class="fa fa-bar-chart"></i>Time Spent</a></li>
-                    <li><a href="about.php"><i class="fa fa-question-circle"></i>About</a></li>
-                    <li><a href="how_to.php"><i class="fa fa-spinner"></i>How to</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out"></i>Logout</a></li>
                 </ul>
             </div>
@@ -157,7 +159,7 @@ include 'connection.php';
                         <li class="ring" id="L">l</li>
                         <li class="pinky" id="colon">:</li>
                         <li class="pinky" id="colon2">"</li>
-                        <li class="pinky" id="enter">enter</li>
+                        <li class="pinky" class="enter" id="enter">enter</li>
                     </ul>
                     <ul class="row row-3">
                         <li class="pinky" id="left-shift">shift</li>
@@ -230,7 +232,7 @@ include 'connection.php';
                         <li class="ring" id="LL">ि</li>
                         <li class="pinky" id="colonn">स</li>
                         <li class="pinky" id="colon2">ु</li>
-                        <li class="pinky" id="enter">enter</li>
+                        <li class="pinky" class="enter" id="enter">enter</li>
                     </ul>
                     <ul class="row row-3">
                         <li class="pinky" id="left-shift">shift</li>
@@ -439,9 +441,9 @@ include 'connection.php';
             }
         }
 
-
         function highlightKeys(currentChar, language) {
             if (language === 'Nepali') {
+                console.log('Before calling highlightNepaliKeys...');
                 highlightNepaliKeys(currentChar);
             } else {
                 // Continue with the existing English keyboard highlighting logic
@@ -481,62 +483,53 @@ include 'connection.php';
         
         let lastCorrectIndex = 0;
 
-        document.addEventListener("keyup", event => {
-            // Check for the backspace key
-            if (event.key === 'Backspace') {
-                // Handle backspace logic here
-                if (currentIndex > 0) {
-                    // Remove the 'selected' class from the current key
-                    const currentChar = showSentence.innerText[currentIndex];
-                    const currentKey = document.getElementById(currentChar.toUpperCase());
-                    if (currentKey) {
-                        currentKey.classList.remove('selected', 'wrong');
-                    }
-
-                    // Move the currentIndex back to the last correct index
-                    currentIndex = lastCorrectIndex;
-
-                    // Highlight the key for the current index without moving it
-                    const prevChar = showSentence.innerText[currentIndex];
-                    highlightKeys(prevChar);
-                }
-                return; // Don't proceed with the regular key handling
+        document.addEventListener("keydown", event => {
+    // Check for the backspace key
+    if (event.key === 'Backspace') {
+        // Handle backspace logic here
+        if (currentIndex > 0) {
+            // Remove the 'selected' class from the current key
+            const currentChar = showSentence.innerText[currentIndex];
+            const currentKey = document.getElementById(currentChar.toUpperCase());
+            if (currentKey) {
+                currentKey.classList.remove('selected', 'wrong');
             }
 
+            // Move the currentIndex back to the last correct index
+            currentIndex = lastCorrectIndex;
 
+            // Highlight the key for the current index without moving it
+            const prevChar = showSentence.innerText[currentIndex];
+            highlightKeys(prevChar);
+        }
+        return; // Don't proceed with the regular key handling
+    }
 
-            let keyPressed;
+    const keyPressed = event.key;
 
-            // Check for the backtick key separately
-            if (event.key === '`') {
-                keyPressed = '`';
-            } else {
-                keyPressed = String.fromCharCode(event.keyCode);
-            }
-            // const keyPressed = String.fromCharCode(event.keyCode);
-            const highlightedKey = document.querySelector(".selected");
+    const highlightedKey = document.querySelector(".selected");
 
-            // Check if the correct key is pressed
-                if (keyPressed === highlightedKey.innerHTML|| (keyPressed === ' ' && highlightedKey.id === 'space')){
-                    // Increment the index
-                    currentIndex++;
+    // Check if the correct key is pressed
+    if (keyPressed === highlightedKey.innerHTML || (keyPressed === ' ' && highlightedKey.id === 'space')) {
+        // Increment the index
+        currentIndex++;
 
-                    // Update the last correct index
-                    lastCorrectIndex = currentIndex;
+        // Update the last correct index
+        lastCorrectIndex = currentIndex;
 
-                    // Highlight the next key if there is one
-                    if (currentIndex < showSentence.innerText.length) {
-                        const nextChar = showSentence.innerText[currentIndex];
-                        highlightKeys(nextChar);
-                    } else{
-                        // End the typing test when the sentence is complete
-                        endTypingTest();
-                    }
-                }else {
-                    // Add the 'wrong' class to the pressed key if there is a mistake
-                    highlightedKey.classList.add('wrong');
-                }
-        });
+        // Highlight the next key if there is one
+        if (currentIndex <= showSentence.innerText.length) {
+            const nextChar = showSentence.innerText[currentIndex];
+            highlightKeys(nextChar);
+        } else {
+            // End the typing test when the sentence is complete
+            endTypingTest();
+        }
+    } else {
+        // Add the 'wrong' class to the pressed key if there is a mistake
+        highlightedKey.classList.add('wrong');
+    }
+});
         // Keybord
         
         //STEP 1
