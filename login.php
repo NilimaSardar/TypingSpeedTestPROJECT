@@ -14,6 +14,12 @@ include 'links.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
     <link rel="stylesheet" href="css/form.css">
+    <style>
+  
+    input:focus-visible{
+        outline: 0.1rem solid  #B2C8BA;
+    }
+    </style>
 </head>
 <body>
     <?php
@@ -86,7 +92,7 @@ include 'links.php';
         
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
         <div class="input-field">
-            <input type="text" name="username" class="input" id="name" placeholder="username">
+            <input type="text" name="username" class="input" id="name" autocomplete="off" placeholder="username">
             <i class="fa fa-user-o" aria-hidden="true"></i>
         </div>
 

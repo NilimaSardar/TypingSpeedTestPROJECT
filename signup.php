@@ -10,6 +10,12 @@ include 'links.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php if(isset($page_title)){ echo "$page_title"; } ?> - Typing Speed Test</title>
     <link rel="stylesheet" href="css/form.css">
+    <style>
+  
+    input:focus-visible{
+        outline: 0.1rem solid  #B2C8BA;
+    }
+    </style>
 </head>
 <body>
 <?php
@@ -45,37 +51,44 @@ if(isset($_POST['submit'])){
    $query = mysqli_query($conn,$emailquery);
  
    $emailcount = mysqli_num_rows($query);
- 
-   if($usercount > 0){
-     $errorMessages[] = "Username already exists";
-   } elseif($emailcount > 0){
-     $errorMessages[] = "Email already exists";
-   } elseif (!preg_match($email_regex, $email)) {
-     $errorMessages[] = "Invalid email format. Please enter a valid email address.";
-   } elseif (strlen($password) < $password_min_length) {
-     $errorMessages[] = "Password is too short. It must be at least $password_min_length characters long.";
-   } elseif (!preg_match($password_complexity, $password)) {
-     $errorMessages[] = "Password must include at least one lowercase letter, one uppercase letter, one number, and one special character.";
-   } elseif($password !== $Rpassword) {
-     $errorMessages[] = "Passwords do not match";
-   } else {
-     $insertquery = "INSERT INTO registration(fullname,username,email,password,Rpassword)
-       VALUES('$fname','$username','$email','$pass','$Rpass')";
- 
-     $iquery = mysqli_query($conn,$insertquery);
- 
-     if($iquery){
-       ?>
-       <script>
-       alert("Registered successfully");
-       window.location = 'login.php'; // Redirect after showing the alert
-       </script>
-       <?php
-     } else {
-       die("Not inserted: " . mysqli_error($conn));
-     }
-   }
- }
+
+    if($usercount > 0){
+      $errorMessages[] = 'user already exist!';
+    }else{
+      if($emailcount>0){
+        $errorMessages[] = "Email already exists";
+      }elseif(!preg_match($email_regex, $email)){
+        $errorMessages[] = "Invalid email format. Please enter a valid email address.";
+      }else{
+        if($password  != $Rpassword ){
+            $errorMessages[] = 'password not matched!';
+        }elseif (strlen($password) < $password_min_length) {
+          $errorMessages[] = "Password is too short. It must be at least $password_min_length characters long.";
+        } elseif (!preg_match($password_complexity, $password)) {
+          $errorMessages[] = "Password must include at least one lowercase letter, one uppercase letter, one number, and one special character.";
+        }
+        else{
+          $insertquery = "INSERT INTO registration(fullname,username,email,password)
+          VALUES('$fname','$username','$email','$pass')";
+  
+          $iquery = mysqli_query($conn,$insertquery);
+  
+          if($iquery){
+            ?>
+            <script>
+            alert("Registered successfully");
+            window.location = 'login.php'; // Redirect after showing the alert
+            </script>
+            <?php
+          } else {
+            die("Not inserted: " . mysqli_error($conn));
+          }
+        }
+      }
+    }
+    
+
+}
  ?>
 
     <div class="box">
@@ -90,23 +103,23 @@ if(isset($_POST['submit'])){
           ?>
               <form action="" method="POST">
                 <div class="input_field">
-                  <input type="text" class="input" name="fname" placeholder="Full Name" value="<?php echo $fname; ?>" />
+                  <input type="text" class="input" name="fname" placeholder="Full Name" autocomplete="off" value="<?php echo $fname; ?>" required/>
                   <i aria-hidden="true" class="fa fa-user"></i>
                 </div>
                 <div class="input_field">
-                  <input type="text" class="input" name="username" placeholder="User Name" value="<?php echo $username; ?>"/>
+                  <input type="text" class="input" name="username" placeholder="User Name" autocomplete="off" value="<?php echo $username; ?>" required/>
                   <i aria-hidden="true" class="fa fa-user"></i>
                 </div>
                 <div class="input_field"> 
-                  <input type="email" class="input" name="email" placeholder="Email" value="<?php echo $email; ?>"/>
+                  <input type="email" class="input" name="email" placeholder="Email" autocomplete="off" value="<?php echo $email; ?>" required/>
                   <i aria-hidden="true" class="fa fa-envelope"></i>
                 </div>
                 <div class="input_field">
-                  <input type="password" class="input" name="password" placeholder="Password"/>
+                  <input type="password" class="input" name="password" placeholder="Password" autocomplete="off" required/>
                   <i aria-hidden="true" class="fa fa-lock"></i>
                 </div>
                 <div class="input_field">
-                  <input type="password" class="input" name="Rpassword" placeholder="Re-type Password"/>
+                  <input type="password" class="input" name="Rpassword" placeholder="Re-type Password" autocomplete="off" required/>
                   <i aria-hidden="true" class="fa fa-lock"></i>
                 </div>
                 

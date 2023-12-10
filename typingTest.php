@@ -130,44 +130,44 @@ include 'connection.php';
                     </ul>
                     <ul class="row row-1">
                         <li class="pinky" id="tab">tab</li>
-                        <li class="pinky" id="Q">Q</li>
-                        <li class="ring" id="W">W</li>
-                        <li class="middle" id="E">E</li>
-                        <li class="pointer1st" id="R">R</li>
-                        <li class="pointer2nd" id="T">T</li>
-                        <li class="pointer2nd" id="Y">Y</li>
-                        <li class="pointer1st" id="U">U</li>
-                        <li class="middle" id="I">I</li>
-                        <li class="ring" id="O">O</li>
-                        <li class="pinky" id="P">P</li>
+                        <li class="pinky" id="Q">q</li>
+                        <li class="ring" id="W">w</li>
+                        <li class="middle" id="E">e</li>
+                        <li class="pointer1st" id="R">r</li>
+                        <li class="pointer2nd" id="T">t</li>
+                        <li class="pointer2nd" id="Y">y</li>
+                        <li class="pointer1st" id="U">u</li>
+                        <li class="middle" id="I">i</li>
+                        <li class="ring" id="O">o</li>
+                        <li class="pinky" id="P">p</li>
                         <li class="pinky" id="open-bracket">[</li>
                         <li class="pinky" id="close-bracket">]</li>
                         <li class="pinky" id="slash">\</li>
                     </ul>
                     <ul class="row row-2">
                         <li class="pinky" id="caps">caps lock</li>
-                        <li class="pinky" id="A">A</li>
-                        <li class="ring" id="S">S</li>
-                        <li class="middle" id="D">D</li>
-                        <li class="pointer1st" id="F">F</li>
-                        <li class="pointer2nd" id="G">G</li>
-                        <li class="pointer2nd" id="H">H</li>
-                        <li class="pointer1st" id="J">J</li>
-                        <li class="middle" id="K">K</li>
-                        <li class="ring" id="L">L</li>
+                        <li class="pinky" id="A">a</li>
+                        <li class="ring" id="S">s</li>
+                        <li class="middle" id="D">d</li>
+                        <li class="pointer1st" id="F">f</li>
+                        <li class="pointer2nd" id="G">g</li>
+                        <li class="pointer2nd" id="H">h</li>
+                        <li class="pointer1st" id="J">j</li>
+                        <li class="middle" id="K">k</li>
+                        <li class="ring" id="L">l</li>
                         <li class="pinky" id="colon">:</li>
                         <li class="pinky" id="colon2">"</li>
                         <li class="pinky" id="enter">enter</li>
                     </ul>
                     <ul class="row row-3">
                         <li class="pinky" id="left-shift">shift</li>
-                        <li class="pinky" id="Z">Z</li>
-                        <li class="ring" id="X">X</li>
-                        <li class="middle" id="C">C</li>
-                        <li class="pointer1st" id="V">V</li>
-                        <li class="pointer2nd" id="B">B</li>
-                        <li class="pointer2nd" id="N">N</li>
-                        <li class="pointer1st" id="M">M</li>
+                        <li class="pinky" id="Z">z</li>
+                        <li class="ring" id="X">x</li>
+                        <li class="middle" id="C">c</li>
+                        <li class="pointer1st" id="V">v</li>
+                        <li class="pointer2nd" id="B">b</li>
+                        <li class="pointer2nd" id="N">n</li>
+                        <li class="pointer1st" id="M">m</li>
                         <li class="middle" id="coma">,</li>
                         <li class="ring" id="dot">.</li>
                         <li class="pinky" id="semi-colon">;</li>
@@ -187,60 +187,60 @@ include 'connection.php';
                 <div class="keyboard nepali-Keyboard" id="nepaliKeyboard" style="display:none;">
                     <ul class="row row-0">
                         <li class="pinky" id="backtick">ञ</li>
-                        <li class="pinky" id="1">ज्ञ</li>
-                        <li class="ring" id="2">घ</li>
-                        <li class="middle" id="3">ङ</li>
-                        <li class="pointer1st" id="4">झ</li>
-                        <li class="pointer2nd" id="5">छ</li>
-                        <li class="pointer2nd" id="6">ट</li>
-                        <li class="pointer1st" id="7">ठ</li>
-                        <li class="middle" id="8">ड</li>
-                        <li class="ring" id="9">ढ</li>
-                        <li class="pinky" id="10">ण</li>
+                        <li class="pinky" id="11">ज्ञ</li>
+                        <li class="ring" id="22">घ</li>
+                        <li class="middle" id="33">ङ</li>
+                        <li class="pointer1st" id="44">झ</li>
+                        <li class="pointer2nd" id="55">छ</li>
+                        <li class="pointer2nd" id="66">ट</li>
+                        <li class="pointer1st" id="77">ठ</li>
+                        <li class="middle" id="88">ड</li>
+                        <li class="ring" id="99">ढ</li>
+                        <li class="pinky" id="100">ण</li>
                         <li class="pinky" id="sub">-</li>
                         <li class="pinky" id="add">+</li>
                         <li class="pinky" id="back">backspace</li>
                     </ul>
                     <ul class="row row-1">
                         <li class="pinky" id="tab">tab</li>
-                        <li class="pinky" id="Q">त्र</li>
-                        <li class="ring" id="W">ध</li>
-                        <li class="middle" id="E">भ</li>
-                        <li class="pointer1st" id="R">च</li>
-                        <li class="pointer2nd" id="T">त</li>
-                        <li class="pointer2nd" id="Y">थ</li>
-                        <li class="pointer1st" id="U">ग</li>
-                        <li class="middle" id="I">ष</li>
-                        <li class="ring" id="O">य</li>
-                        <li class="pinky" id="P">उ</li>
+                        <li class="pinky" id="QQ">त्र</li>
+                        <li class="ring" id="WW">ध</li>
+                        <li class="middle" id="EE">भ</li>
+                        <li class="pointer1st" id="RR">च</li>
+                        <li class="pointer2nd" id="TT">त</li>
+                        <li class="pointer2nd" id="Y"Y>थ</li>
+                        <li class="pointer1st" id="UU">ग</li>
+                        <li class="middle" id="II">ष</li>
+                        <li class="ring" id="OO">य</li>
+                        <li class="pinky" id="PP">उ</li>
                         <li class="pinky" id="open-bracket">[</li>
                         <li class="pinky" id="close-bracket">]</li>
                         <li class="pinky" id="slash">\</li>
                     </ul>
                     <ul class="row row-2">
                         <li class="pinky" id="caps">caps lock</li>
-                        <li class="pinky" id="A">ब</li>
-                        <li class="ring" id="S">क</li>
-                        <li class="middle" id="D">म</li>
-                        <li class="pointer1st" id="F">ा</li>
-                        <li class="pointer2nd" id="G">न</li>
-                        <li class="pointer2nd" id="H">ज</li>
-                        <li class="pointer1st" id="J">व</li>
-                        <li class="middle" id="K">प</li>
-                        <li class="ring" id="L">ि</li>
-                        <li class="pinky" id="colon">स</li>
+                        <li class="pinky" id="AA">ब</li>
+                        <li class="ring" id="SS">क</li>
+                        <li class="middle" id="DD">म</li>
+                        <li class="pointer1st" id="FF">ा</li>
+                        <li class="pointer2nd" id="GG">न</li>
+                        <li class="pointer2nd" id="HH">ज</li>
+                        <li class="pointer1st" id="JJ">व</li>
+                        <li class="middle" id="KK">प</li>
+                        <li class="ring" id="LL">ि</li>
+                        <li class="pinky" id="colonn">स</li>
                         <li class="pinky" id="colon2">ु</li>
                         <li class="pinky" id="enter">enter</li>
                     </ul>
                     <ul class="row row-3">
                         <li class="pinky" id="left-shift">shift</li>
-                        <li class="pinky" id="Z">श</li>
-                        <li class="ring" id="X">ह</li>
-                        <li class="middle" id="C">अ</li>
-                        <li class="pointer1st" id="V">ख</li>
-                        <li class="pointer2nd" id="B">द</li>
-                        <li class="pointer2nd" id="N">ल</li>
-                        <li class="pointer1st" id="M">फ</li>
+                        <li class="pinky" id="ZZ">श</li>
+                        <li class="ring" id="XX">ह</li>
+                        <li class="middle" id="CC">अ</li>
+                        <li class="pointer1st" id="VV">ख</li>
+                        <li class="pointer2nd" id="BB">द</li>
+                        <li class="pointer2nd" id="NN">ल</li>
+                        <li class="pointer1st" id="MM">फ</li>
                         <li class="middle" id="coma">,</li>
                         <li class="ring" id="dot">.</li>
                         <li class="pinky" id="semi-colon">;</li>
@@ -309,39 +309,173 @@ include 'connection.php';
             }
         });
 
-        function highlightKeys(currentChar) {
+        function highlightNepaliKeys(currentChar) {
+            console.log('Highlighting Nepali Key:', currentChar);
             // Remove previous highlights
-            document.querySelectorAll('.keyboard li').forEach(key => {
-                key.classList.remove('selected' ,'wrong');
+            document.querySelectorAll('.nepali-Keyboard li').forEach(key => {
+                key.classList.remove('selected', 'wrong');
             });
 
-            // Highlight the current key
-            const keyElement = document.getElementById(currentChar.toUpperCase());
+            // Highlight the current key on the Nepali keyboard
+            const keyId = getKeyIdForNepaliChar(currentChar);
+            const keyElement = document.getElementById(keyId);
+        
+            console.log('Key ID:', keyId);
+            console.log('Key Element:', keyElement);
+
             if (keyElement) {
                 keyElement.classList.add('selected');
             }
-            // Special handling for spacebar
-            if (currentChar === '.') {
-                const dotKey = document.getElementById('dot');
-                if (dotKey) {
-                    dotKey.classList.add('selected');
-                }
-            }
-            // Update the ID in the JavaScript function
-            if (currentChar === '`') {
-                const backtickKey = document.getElementById('backtick');
-                if (backtickKey) {
-                    backtickKey.classList.add('selected');
-                }
-            }
 
+            // Special handling for spacebar
             if (currentChar === ' ') {
                 const spaceKey = document.getElementById('space');
                 if (spaceKey) {
                     spaceKey.classList.add('selected');
                 }
             }
-    
+        }
+
+        function getKeyIdForNepaliChar(currentChar) {
+            switch (currentChar) {
+                case 'ञ':
+                    return 'backtick';
+                case 'ज्ञ':
+                    return '11';
+                case 'घ':
+                    return '22';
+                case 'ङ':
+                    return '33';
+                case 'झ':
+                    return '44';
+                case 'छ':
+                    return '55';
+                case 'ट':
+                    return '66';
+                case 'ठ':
+                    return '77';
+                case 'ड':
+                    return '88';
+                case 'ढ':
+                    return '99';
+                case 'ण':
+                    return '100';
+                case 'त्र':
+                    return 'QQ';
+                case 'ध':
+                    return 'WW';
+                case 'भ':
+                    return 'EE';
+                case 'च':
+                    return 'RR';
+                case 'त':
+                    return 'TT';
+                case 'थ':
+                    return 'YY';
+                case 'ग':
+                    return 'UU';
+                case 'ष':
+                    return 'II';
+                case 'य':
+                    return 'OO';
+                case 'उ':
+                    return 'PP';
+                case 'ब':
+                    return 'AA';
+                case 'क':
+                    return 'SS';
+                case 'म':
+                    return 'DD';
+                case 'ा':
+                    return 'FF';
+                case 'न':
+                    return 'GG';
+                case 'ज':
+                    return 'HH';
+                case 'व':
+                    return 'JJ';
+                case 'प':
+                    return 'KK';
+                case 'ि':
+                    return 'LL';
+                case 'स':
+                    return 'colon';
+                case 'ु':
+                    return 'colon2';
+                case 'enter':
+                    return 'enter';
+                case 'shift':
+                    return 'right-shift'; // or 'left-shift' based on your layout
+                case 'श':
+                    return 'ZZ';
+                case 'ह':
+                    return 'XX';
+                case 'अ':
+                    return 'CC';
+                case 'ख':
+                    return 'VV';
+                case 'द':
+                    return 'BB';
+                case 'ल':
+                    return 'NN';
+                case 'फ':
+                    return 'MM';
+                case 'comma':
+                    return 'coma';
+                case 'dot':
+                    return 'dot';
+                case 'semi-colon':
+                    return 'semi-colon';
+                case 'ctrl':
+                    return 'ctrl';
+                case 'win':
+                    return 'win';
+                case 'alt':
+                    return 'alt';
+                case 'space':
+                    return 'space';
+                default:
+                    return '';
+            }
+        }
+
+
+        function highlightKeys(currentChar, language) {
+            if (language === 'Nepali') {
+                highlightNepaliKeys(currentChar);
+            } else {
+                // Continue with the existing English keyboard highlighting logic
+                document.querySelectorAll('.english-Keyboard li').forEach(key => {
+                    key.classList.remove('selected', 'wrong');
+                });
+
+                const keyElement = document.getElementById(currentChar.toUpperCase());
+                if (keyElement) {
+                    keyElement.classList.add('selected');
+                }
+
+                // Special handling for spacebar
+                if (currentChar === '.') {
+                    const dotKey = document.getElementById('dot');
+                    if (dotKey) {
+                        dotKey.classList.add('selected');
+                    }
+                }
+
+                if (currentChar === '`') {
+                    const backtickKey = document.getElementById('backtick');
+                    if (backtickKey) {
+                        backtickKey.classList.add('selected');
+                    }
+                }
+
+                if (currentChar === ' ') {
+                    const spaceKey = document.getElementById('space');
+                    if (spaceKey) {
+                        spaceKey.classList.add('selected');
+                    }
+                }
+            }
         }
         
         

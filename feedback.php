@@ -14,10 +14,11 @@ if(!isset($_SESSION['username'])){
 include 'links.php';
 include 'connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+if (isset($_POST["submit"])) {
     $rating = $_POST["rate"];
     $feedback = $_POST["feedback"];
     $username = $_SESSION['username'];
+    echo "name:".$username;
 
     // Check if the user has existing feedback
     $sql = "SELECT * FROM feedback WHERE username = '$username'";
@@ -186,24 +187,24 @@ $conn->close();
                     <div class="edit">Edit</div>
                 </div>
                 <div class="star-widget">
-                    <input type="radio" name="rate" id="rate-5">
+                    <input type="radio" name="rate" id="rate-5" value="5">
                     <label for="rate-5" class="fa fa-star"></label>
-                    <input type="radio" name="rate" id="rate-4">
+                    <input type="radio" name="rate" id="rate-4" value="4">
                     <label for="rate-4" class="fa fa-star"></label>
-                    <input type="radio" name="rate" id="rate-3">
+                    <input type="radio" name="rate" id="rate-3" value="3">
                     <label for="rate-3" class="fa fa-star"></label>
-                    <input type="radio" name="rate" id="rate-2">
+                    <input type="radio" name="rate" id="rate-2" value="2">
                     <label for="rate-2" class="fa fa-star"></label>
-                    <input type="radio" name="rate" id="rate-1">
+                    <input type="radio" name="rate" id="rate-1" value="1">
                     <label for="rate-1" class="fa fa-star"></label>
 
-                    <form action="">
+                    <form action="" method="POST">
                         <h3></h3>
                         <div class="textarea">
                             <textarea name="feedback" id="" cols="43" rows="5" placeholder="Describe your experience. ." ></textarea>
                         </div>
                         <span>
-                            <button class="submit" type="submit">Done</button>
+                            <button class="submit" type="submit" name="submit">Done</button>
                         </span>
                     </form>
 
