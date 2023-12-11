@@ -124,7 +124,7 @@ $page_title = "About Us";
                     </div>
                     <h1 class="section-common--title">Archana Kumari Mandal</h1>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi 
+                        Frontend Developer 
                     </p>
                 </div>
 
@@ -134,9 +134,8 @@ $page_title = "About Us";
                     </div>
                     <h1 class="section-common--title">Nilima Sardar</h1>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi 
+                         Backend developer
                     </p>
-                </div>
             </div>
     </section>
     <!-- Ends Development Team section -->

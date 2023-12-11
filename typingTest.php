@@ -188,61 +188,61 @@ include 'connection.php';
 
                 <div class="keyboard nepali-Keyboard" id="nepaliKeyboard" style="display:none;">
                     <ul class="row row-0">
-                        <li class="pinky" id="backtick">ञ</li>
-                        <li class="pinky" id="11">ज्ञ</li>
-                        <li class="ring" id="22">घ</li>
-                        <li class="middle" id="33">ङ</li>
-                        <li class="pointer1st" id="44">झ</li>
-                        <li class="pointer2nd" id="55">छ</li>
-                        <li class="pointer2nd" id="66">ट</li>
-                        <li class="pointer1st" id="77">ठ</li>
-                        <li class="middle" id="88">ड</li>
-                        <li class="ring" id="99">ढ</li>
-                        <li class="pinky" id="100">ण</li>
+                        <li class="pinky" id="ञ">ञ</li>
+                        <li class="pinky" id="ज्ञ">ज्ञ</li>
+                        <li class="ring" id="घ">घ</li>
+                        <li class="middle" id="ङ">ङ</li>
+                        <li class="pointer1st" id="झ">झ</li>
+                        <li class="pointer2nd" id="छ">छ</li>
+                        <li class="pointer2nd" id="ट">ट</li>
+                        <li class="pointer1st" id="ठ">ठ</li>
+                        <li class="middle" id="ड">ड</li>
+                        <li class="ring" id="ढ">ढ</li>
+                        <li class="pinky" id="ण">ण</li>
                         <li class="pinky" id="sub">-</li>
                         <li class="pinky" id="add">+</li>
                         <li class="pinky" id="back">backspace</li>
                     </ul>
                     <ul class="row row-1">
                         <li class="pinky" id="tab">tab</li>
-                        <li class="pinky" id="QQ">त्र</li>
-                        <li class="ring" id="WW">ध</li>
-                        <li class="middle" id="EE">भ</li>
-                        <li class="pointer1st" id="RR">च</li>
-                        <li class="pointer2nd" id="TT">त</li>
-                        <li class="pointer2nd" id="Y"Y>थ</li>
-                        <li class="pointer1st" id="UU">ग</li>
-                        <li class="middle" id="II">ष</li>
-                        <li class="ring" id="OO">य</li>
-                        <li class="pinky" id="PP">उ</li>
+                        <li class="pinky" id="त्र">त्र</li>
+                        <li class="ring" id="ध">ध</li>
+                        <li class="middle" id="भ">भ</li>
+                        <li class="pointer1st" id="च">च</li>
+                        <li class="pointer2nd" id="त">त</li>
+                        <li class="pointer2nd" id="थ">थ</li>
+                        <li class="pointer1st" id="ग">ग</li>
+                        <li class="middle" id="ष">ष</li>
+                        <li class="ring" id="य">य</li>
+                        <li class="pinky" id="उ">उ</li>
                         <li class="pinky" id="open-bracket">[</li>
                         <li class="pinky" id="close-bracket">]</li>
                         <li class="pinky" id="slash">\</li>
                     </ul>
                     <ul class="row row-2">
                         <li class="pinky" id="caps">caps lock</li>
-                        <li class="pinky" id="AA">ब</li>
-                        <li class="ring" id="SS">क</li>
-                        <li class="middle" id="DD">म</li>
-                        <li class="pointer1st" id="FF">ा</li>
-                        <li class="pointer2nd" id="GG">न</li>
-                        <li class="pointer2nd" id="HH">ज</li>
-                        <li class="pointer1st" id="JJ">व</li>
-                        <li class="middle" id="KK">प</li>
-                        <li class="ring" id="LL">ि</li>
-                        <li class="pinky" id="colonn">स</li>
-                        <li class="pinky" id="colon2">ु</li>
+                        <li class="pinky" id="ब">ब</li>
+                        <li class="ring" id="क">क</li>
+                        <li class="middle" id="म">म</li>
+                        <li class="pointer1st" id="ा">ा</li>
+                        <li class="pointer2nd" id="न">न</li>
+                        <li class="pointer2nd" id="ज">ज</li>
+                        <li class="pointer1st" id="व">व</li>
+                        <li class="middle" id="प">प</li>
+                        <li class="ring" id="ि">ि</li>
+                        <li class="pinky" id="स">स</li>
+                        <li class="pinky" id="ु">ु</li>
                         <li class="pinky" class="enter" id="enter">enter</li>
                     </ul>
                     <ul class="row row-3">
                         <li class="pinky" id="left-shift">shift</li>
-                        <li class="pinky" id="ZZ">श</li>
-                        <li class="ring" id="XX">ह</li>
-                        <li class="middle" id="CC">अ</li>
-                        <li class="pointer1st" id="VV">ख</li>
-                        <li class="pointer2nd" id="BB">द</li>
-                        <li class="pointer2nd" id="NN">ल</li>
-                        <li class="pointer1st" id="MM">फ</li>
+                        <li class="pinky" id="श">श</li>
+                        <li class="ring" id="ह">ह</li>
+                        <li class="middle" id="अ">अ</li>
+                        <li class="pointer1st" id="ख">ख</li>
+                        <li class="pointer2nd" id="द">द</li>
+                        <li class="pointer2nd" id="ल">ल</li>
+                        <li class="pointer1st" id="फ">फ</li>
                         <li class="middle" id="coma">,</li>
                         <li class="ring" id="dot">.</li>
                         <li class="pinky" id="semi-colon">;</li>
@@ -331,7 +331,7 @@ include 'connection.php';
 
             // Special handling for spacebar
             if (currentChar === ' ') {
-                const spaceKey = document.getElementById('space');
+                const spaceKey = document.getElementById('spacebar');
                 if (spaceKey) {
                     spaceKey.classList.add('selected');
                 }
@@ -341,92 +341,92 @@ include 'connection.php';
         function getKeyIdForNepaliChar(currentChar) {
             switch (currentChar) {
                 case 'ञ':
-                    return 'backtick';
+                    return 'ञ';
                 case 'ज्ञ':
-                    return '11';
+                    return 'ज्ञ';
                 case 'घ':
-                    return '22';
+                    return 'घ';
                 case 'ङ':
-                    return '33';
+                    return 'ङ';
                 case 'झ':
-                    return '44';
+                    return 'झ';
                 case 'छ':
-                    return '55';
+                    return 'छ';
                 case 'ट':
-                    return '66';
+                    return 'ट';
                 case 'ठ':
-                    return '77';
+                    return 'ठ';
                 case 'ड':
-                    return '88';
+                    return 'ड';
                 case 'ढ':
-                    return '99';
+                    return 'ढ';
                 case 'ण':
-                    return '100';
+                    return 'ण';
                 case 'त्र':
-                    return 'QQ';
+                    return 'त्र';
                 case 'ध':
-                    return 'WW';
+                    return 'ध';
                 case 'भ':
-                    return 'EE';
+                    return 'भ';
                 case 'च':
-                    return 'RR';
+                    return 'च';
                 case 'त':
-                    return 'TT';
+                    return 'त';
                 case 'थ':
-                    return 'YY';
+                    return 'थ';
                 case 'ग':
-                    return 'UU';
+                    return 'ग';
                 case 'ष':
-                    return 'II';
+                    return 'ष';
                 case 'य':
-                    return 'OO';
+                    return 'य';
                 case 'उ':
-                    return 'PP';
+                    return 'उ';
                 case 'ब':
-                    return 'AA';
+                    return 'ब';
                 case 'क':
-                    return 'SS';
+                    return 'क';
                 case 'म':
-                    return 'DD';
+                    return 'म';
                 case 'ा':
-                    return 'FF';
+                    return 'ा';
                 case 'न':
-                    return 'GG';
+                    return 'न';
                 case 'ज':
-                    return 'HH';
+                    return 'ज';
                 case 'व':
-                    return 'JJ';
+                    return 'व';
                 case 'प':
-                    return 'KK';
+                    return 'प';
                 case 'ि':
-                    return 'LL';
+                    return 'ि';
                 case 'स':
-                    return 'colon';
+                    return 'स';
                 case 'ु':
-                    return 'colon2';
+                    return 'ु';
                 case 'enter':
                     return 'enter';
                 case 'shift':
                     return 'right-shift'; // or 'left-shift' based on your layout
                 case 'श':
-                    return 'ZZ';
+                    return 'श';
                 case 'ह':
-                    return 'XX';
+                    return 'ह';
                 case 'अ':
-                    return 'CC';
+                    return 'अ';
                 case 'ख':
-                    return 'VV';
+                    return 'ख';
                 case 'द':
-                    return 'BB';
+                    return 'द';
                 case 'ल':
-                    return 'NN';
+                    return 'ल';
                 case 'फ':
-                    return 'MM';
-                case 'comma':
+                    return 'फ';
+                case ',':
                     return 'coma';
-                case 'dot':
+                case '.':
                     return 'dot';
-                case 'semi-colon':
+                case ':':
                     return 'semi-colon';
                 case 'ctrl':
                     return 'ctrl';
@@ -434,7 +434,7 @@ include 'connection.php';
                     return 'win';
                 case 'alt':
                     return 'alt';
-                case 'space':
+                case ' ':
                     return 'space';
                 default:
                     return '';
@@ -627,18 +627,19 @@ include 'connection.php';
         const calculateTypingSpeed = (totalTimeTaken) =>{
             let totalWords = typing_ground.value.trim();
             let actualWords = totalWords === '' ? 0 : totalWords.split(" ");
-
+            let totalwords = totalWords.split(" ").length;
             //errorChecking
             actualWords = errorChecking(actualWords);
 
-            let typing_speed = (actualWords/totalTimeTaken)*60;
+            let typing_speed = (totalwords/totalTimeTaken)*60;
                 typing_speed = Math.round(typing_speed);
+
                 sentence_to_write = sentence_to_write.length;
 
             if(actualWords !== 0){
-                score.innerHTML = `Your typing speed is ${typing_speed} words per minutes & you wrote ${actualWords} correct words out of ${sentence_to_write} & time taken ${totalTimeTaken} sec`;
+                score.innerHTML = `WPM: ${typing_speed}  |  Written Word: ${totalwords}  |  Correct Word: ${actualWords}  |  Out of: ${sentence_to_write}  |  Time Taken: ${totalTimeTaken} sec`;
             }else{
-                score.innerHTML = `Your typing speed is 0 words per minutes & TIME TAKEN ${totalTimeTaken}  sec`;
+                score.innerHTML = `WPM: 0  |  Written Word: 0  |  Correct Word: 0  |  Out of: ${sentence_to_write}  |  Time Taken: ${totalTimeTaken} sec`;
             }
 
             //Storing all records into database
@@ -674,6 +675,7 @@ include 'connection.php';
             endTime = date.getTime();
 
             totalTimeTaken = (endTime-startTime) / 1000;
+            totalTimeTaken = Math.round(totalTimeTaken);
             //console.log(totalTimeTaken);
 
             calculateTypingSpeed(totalTimeTaken);

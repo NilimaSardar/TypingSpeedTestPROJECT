@@ -1,5 +1,5 @@
 <?php
-$page_title="Test";
+$page_title="How_to";
 ?>
 <!DOCTYPE html>
 <html lang="en">
