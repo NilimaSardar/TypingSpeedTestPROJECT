@@ -113,7 +113,7 @@ $page_title="How_to";
                 <div class="icon">
                     <img src="images/coding2.webp" alt="image speed">
                 </div>
-                <h1 class="section-common--title">Coding Typing</h1>
+                <h1 class="section-common--title">Coding Typing(Future Work)</h1>
                 <p>Perfect for programmers and coders. Code snippets will be provided, and you'll need to type them accurately and efficiently. This test emphasizes code readability and accuracy.</p>
             </div>
         </div>
